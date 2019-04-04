@@ -1,15 +1,68 @@
 <section>
   <div class="col-sm-12 mantra hide-while-loading">
-    <div class="logo"><img width="120px"
-        src="//d3d4ig6l9m673k.cloudfront.net/assets/logo/logo-white-d3f81b03bdec11819bfde8e9392bdc5a.png"
-        alt="Logo white"></div><br>
-    <p>pronounced dis-til'd</p><br><br>
-    <h3>We believe less is more</h3>
-    <h3>We think retail must evolve</h3>
-    <h3>We dream in black+white</h3>
-    <h3>We live in Denim</h3><br><br>
-    <h4>Dis'till</h4>
-    <p>Extract the essential meaning or most important aspect of</p>
+    <div class="logo">
+      <img width="120px"
+        src="{{ section.settings.logo_url }}"
+        alt="Logo white">
+    </div>
+    <div class="beginning-text">
+      {{ section.settings.beginning_text }}
+    </div>
+    <div class="main-text">
+      {{ section.settings.main_text }}
+    </div>
+    <div class="end-text">
+      {{ section.settings.end_text }}
+    </div>
   </div>
   <div class="clearfix"></div>
 </section>
+
+<style>
+  .beginning_text {
+
+  }
+  .main-text {
+    margin: 50px 0;
+  }
+  .main-text p {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "Mantra",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_url",
+      "label": "Logo URL",
+      "default": "//d3d4ig6l9m673k.cloudfront.net/assets/logo/logo-white-d3f81b03bdec11819bfde8e9392bdc5a.png"
+    },
+    {
+      "type": "richtext",
+      "id": "beginning_text",
+      "label": "Beginning Text",
+      "default": "<p>pronounced dis-til'd</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "main_text",
+      "label": "Main Content",
+      "default": "<p><strong>We believe less is more<br></strong></p><p><strong>We think retail must evolve</strong></p><p><strong>We dream in black+white</strong></p><p><strong>We live in Denim</strong></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "end_text",
+      "label": "End Text",
+      "default": " <p><strong>Dis'till</strong></p><p>Extract the essential meaning or most important aspect of</p>"
+    }
+  ]
+}
+{% endschema %}
