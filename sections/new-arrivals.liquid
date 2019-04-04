@@ -1,45 +1,41 @@
 <div class="container-fluid">
   <div class="col-sm-12">
-    <br/>
-    <h2>New Arrivals</h2>
-    <br/>
+  {% include 'headline-title', content: section.settings.headline_text %}
   </div>
   <div class="col-sm-12 tab-content">
     <div class="product-grid tab-pane active" id="all">
-      {% assign collection = collections['newest-products'] %}
-      {% for product in collection.products limit: 8 %}
-        <div class="col-sm-3 col-xs-6 product">
-          <div class="img">
-            <a class="product-link" href="{{ product.url }}">
-              <div class="square-product-img">
-                <img on-scroll-to="ll.scrollHandler" alt="{{ product.title }}"
-                  aot="true" class="desktop fst" ng-lazy-load="" scroll-offset="200"
-                  src="{{ product.featured_image | img_url: '300x300' }}"
-                  width="100%">
-                <img alt="{{ product.title }}" class="desktop snd"
-                  src="{{ product.images[1] | img_url: '300x300' }}"
-                  width="100%">
-                <img class="bg-img"
-                  src="//d3d4ig6l9m673k.cloudfront.net/assets/preloaders/dstld-loader-c3c41166b90c235fed5f014602ef1d59.gif"
-                  width="100%">
-              </div>
-            </a>
-          </div>
-          <a class="content"
-            href="{{ product.url }}">
-            <div class="name product-name">{{ product.title }}</div>
-            {% for option in product.options %}
-              {% if option == 'Color' %} 
-                {% assign index = forloop.index0 %}
-                {% for variant in product.variants %}
-                  <div class="color">{{ variant.options[index] }}</div>
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-            <span class="price">{{ product.price | money }}&nbsp;&nbsp;</span>
-          </a>
-        </div>
+      {% for block in section.blocks %}
+        {%- assign product = all_products[block.settings.product] -%}
+        {% include 'collection-product', product: product %}
       {% endfor %}
     </div>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "New Arrivals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Section Title",
+      "default": "New Arrival"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "new_arrival_product",
+      "name": "New Arrival Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20
+}
+{% endschema %}
