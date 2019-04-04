@@ -1,0 +1,53 @@
+<div class="navbar navbar-default navbar-top navbar-fixed-top">
+  <div class="nav-container">
+    <div class="top-container">
+      <div class="navbar-header">
+        <div class="navbar-brand-centered"><a class="logo navbar-brand" href="/"></a></div>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav hide-while-loading">
+          {% for link in linklists['main-left-menu'].links %}
+            <li class="dropdown"><a class="nav-bold" href="{{ link.url }}">{{ link.title }}</a>
+              <ul class="dropdown-menu">
+                <div class="desktop-only">
+                  <div class="menu-column">
+                    {% for childLink in link.links %}
+                      <li>
+                        <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </div>
+                </div>
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right hide-while-loading">
+          {% if customer %}
+            <li class="dropdown " ><a class="dropdown-toggle" ng-href="/account"
+                href="/account"><span>Account</span></a>
+              {% for link in linklists['account'].links %}
+                <li> 
+                  <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
+                </li>
+              {% endfor %}
+            </li>
+            {%- comment -%}
+            <li class="investor-badge"><a alt="Investor Portal"
+              href="/investor"><span><i class="fa fa-line-chart" title="Investor Portal">&nbsp;</i></span></a></li>
+            {%- endcomment -%}
+          {% else %}
+            <li><a onclick="showUserModal()">Signup</a></li>
+            <li><a onclick="showUserModal('login')">Login</a></li>
+          {% endif %}
+          {% if cart.item_count > 0 %}
+            <li><a onclick="openCart()"><span class="ng-binding "><i
+                  class="fa fa-lg fa-shopping-cart" title="Cart"></i>({{ cart.item_count }})</span></a></li>
+            <li ng-show="!isCartEmpty() &amp;&amp; oneShirt()" class=""><a ng-click="openCart()"
+              ng-disabled="updatingAmount == true"><span>Checkout</span></a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="hero">
+  {% include 'home-intro', content: section.settings.headline_text %}
+  <section class="home-main hide-while-loading">
+    <div class="col-sm-6 no-padding big-gender-link"><a href="/collections/women"><img
+          src="//res.cloudinary.com/dstldjeans/image/fetch/f_jpg/https%3A%2F%2Fd4zpg1jklewne.cloudfront.net%2Fsteak%2Fgalleries%2F22%2Fwomens-1553127956307%2Fwomen.jpg%3F1553127956"
+          width="100%">
+        <figcaption>
+          <div class="content-holder">
+            <h2 class="text-left">Women</h2>
+          </div>
+        </figcaption>
+      </a></div>
+    <div class="col-sm-6 no-padding big-gender-link"><a href="/collections/men"><img
+          src="//res.cloudinary.com/dstldjeans/image/fetch/f_jpg/https%3A%2F%2Fd4zpg1jklewne.cloudfront.net%2Fsteak%2Fgalleries%2F22%2Fmens-1553127984351%2Fmen.jpg%3F1553127984"
+          width="100%">
+        <figcaption>
+          <h2 class="text-left">Men</h2>
+        </figcaption>
+      </a></div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Headline Text",
+      "default": "Your text here"
+    }
+  ]
+}
+{% endschema %}
