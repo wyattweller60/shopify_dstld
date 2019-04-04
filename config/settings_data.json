@@ -147,7 +147,13 @@
       "hero": {
         "type": "hero",
         "settings": {
-          "headline_text": "Premium Denim + Essentials. No Retail Markup."
+          "headline_text": "Premium Denim + Essentials. No Retail Markup.",
+          "left_collections_img": "//res.cloudinary.com/dstldjeans/image/fetch/f_jpg/https%3A%2F%2Fd4zpg1jklewne.cloudfront.net%2Fsteak%2Fgalleries%2F22%2Fwomens-1553127956307%2Fwomen.jpg%3F1553127956",
+          "right_collections_img": "//res.cloudinary.com/dstldjeans/image/fetch/f_jpg/https%3A%2F%2Fd4zpg1jklewne.cloudfront.net%2Fsteak%2Fgalleries%2F22%2Fmens-1553127984351%2Fmen.jpg%3F1553127984",
+          "right_collections_title": "Men",
+          "left_collections_title": "Women",
+          "right_collections_url": "/collections/men",
+          "left_collections_url": "/collections/women"
         }
       }
     },
