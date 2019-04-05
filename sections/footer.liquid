@@ -15,105 +15,106 @@
   {%- assign social_icons = true -%}
 {%- endif -%}
 
-<footer class="hide-while-loading ng-scope">
+<footer class="container-fluid">
   <div class="row">
-    <div class="main-footer col-sm-6" >
-      <div class="hide-while-loading">
-        <div class="footer-nav text-left">
-          <div class="row">
-            <div class="col-xs-12 col-sm-11 col-sm-offset-1 footer-menu">
-              {% for link in linklists['footer'].links %}
-                <div class="col-sm-4 col-xs-6">
-                  <h4 class="footer-link-header">{{ link.title }}</h4>
-                  {% for childLink in link.links %}
-                    <a href="{{ childLink.url }}">{{ childLink.title }}</a><br>
-                  {% endfor %}
-                </div>
-              {% endfor %}
-              <div class="col-sm-4 col-xs-6">
-                <h4 class="footer-link-header">Connect</h4>
-                {%- if social_icons -%}
-                  {%- if settings.social_facebook_link != blank -%}
-                    <a href="{{ settings.social_facebook_link | escape }}" target="_blank">Facebook</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_twitter_link != blank -%}
-                    <a href="{{ settings.social_twitter_link | escape }}" target="_blank">Twitter</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_pinterest_link != blank -%}
-                    <a href="{{ settings.social_pinterest_link | escape }}" target="_blank">Pinterest</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_instagram_link != blank -%}
-                    <a href="{{ settings.social_instagram_link | escape }}" target="_blank">Instagram</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_tumblr_link != blank -%}
-                    <a href="{{ settings.social_tumblr_link | escape }}" target="_blank">Tumblr</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_snapchat_link != blank -%}
-                    <a href="{{ settings.social_snapchat_link | escape }}" target="_blank">Snapchat</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_youtube_link != blank -%}
-                    <a href="{{ settings.social_youtube_link | escape }}" target="_blank">Youtube</a><br>
-                  {%- endif -%}
-                  {%- if settings.social_vimeo_link != blank -%}
-                    <a href="{{ settings.social_vimeo_link | escape }}" target="_blank">Vimeo</a><br>
-                  {%- endif -%}
-                {%- endif -%}
+    <div class="main-footer col-12 col-md-6" >
+      <div class="footer-nav text-left">
+        <div class="row">
+          <div class="col-12 col-offset-1 footer-menu">
+            {% for link in linklists['footer'].links %}
+              <div class="col-6 col-md-4 float-left">
+                <h4 class="footer-link-header">{{ link.title }}</h4>
+                {% for childLink in link.links %}
+                  <a href="{{ childLink.url }}">{{ childLink.title }}</a><br>
+                {% endfor %}
               </div>
+            {% endfor %}
+            <div class="col-6 col-md-4 float-left">
+              <h4 class="footer-link-header">Connect</h4>
+              {%- if social_icons -%}
+                {%- if settings.social_facebook_link != blank -%}
+                  <a href="{{ settings.social_facebook_link | escape }}" target="_blank">Facebook</a><br>
+                {%- endif -%}
+                {%- if settings.social_twitter_link != blank -%}
+                  <a href="{{ settings.social_twitter_link | escape }}" target="_blank">Twitter</a><br>
+                {%- endif -%}
+                {%- if settings.social_pinterest_link != blank -%}
+                  <a href="{{ settings.social_pinterest_link | escape }}" target="_blank">Pinterest</a><br>
+                {%- endif -%}
+                {%- if settings.social_instagram_link != blank -%}
+                  <a href="{{ settings.social_instagram_link | escape }}" target="_blank">Instagram</a><br>
+                {%- endif -%}
+                {%- if settings.social_tumblr_link != blank -%}
+                  <a href="{{ settings.social_tumblr_link | escape }}" target="_blank">Tumblr</a><br>
+                {%- endif -%}
+                {%- if settings.social_snapchat_link != blank -%}
+                  <a href="{{ settings.social_snapchat_link | escape }}" target="_blank">Snapchat</a><br>
+                {%- endif -%}
+                {%- if settings.social_youtube_link != blank -%}
+                  <a href="{{ settings.social_youtube_link | escape }}" target="_blank">Youtube</a><br>
+                {%- endif -%}
+                {%- if settings.social_vimeo_link != blank -%}
+                  <a href="{{ settings.social_vimeo_link | escape }}" target="_blank">Vimeo</a><br>
+                {%- endif -%}
+              {%- endif -%}
             </div>
           </div>
-        </div><br>
-        <div class="btn-to-top mobile-only"><a class="btn btn-default" ng-click="scrollToTop()"><span
-              class="fa fa-angle-up"></span></a></div>
+        </div>
+        <br>
+        <div class="btn-to-top mobile-only">
+          <a class="btn btn-default" onClick="scrollToTop()">
+            <span
+              class="fa fa-angle-up"></span>
+          </a>
+        </div>
       </div>
     </div>
-    {% unless customer %}
-      <div class="col-sm-6">
-        <div class="hide-while-loading">
-          <div class="footer-email-signup">
-            <form ng-submit="emailSignup()" class="ng-pristine ng-invalid ng-invalid-required ng-valid-email">
-              <p class="big text-left">Sign up for 10% off your first order.</p>
-              <div class="form-group">
-                <div class="col-md-8 col-sm-6 email-col">
+  {% unless customer %}
+    <div class="col-12 col-md-6 desktop-only">
+      <div class="footer-email-signup">
+        <form onSubmit="emailSignup()">
+          <p class="big text-left">Sign up for 10% off your first order.</p>
+          <div class="form-group row">
+            <div class="col-md-8 col-6 email-col">
+              <input
+                class="form-control underline"
+                name="email" placeholder="Email" type="email" required="required">
+            </div>
+            <div class="col-md-2 col-3 gender-col">
+              <div id="gender-choice-footer">
+                <div class="col-12 gender-col">
                   <input
-                    class="form-control underline ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-email"
-                    name="email" ng-required="true" placeholder="Email" type="email" required="required">
+                    class="gender-radio male-radio" id="gender-radio2"
+                    name="gender_email_signup" type="radio"
+                    value="Male">
+                  <label class="gender-label male-label" data-tooltip="male"
+                    for="gender-radio2">Mens</label>
                 </div>
-                <div class="col-md-2 col-sm-3 gender-col">
-                  <div id="gender-choice-footer">
-                    <div class="col-sm-12 gender-col">
-                      <input
-                        class="gender-radio male-radio ng-pristine ng-untouched ng-valid ng-not-empty" id="gender-radio2"
-                        name="gender_email_signup" ng-focus="signup.gender='Male'" ng-model="signup.gender" type="radio"
-                        value="Male">
-                      <label class="gender-label male-label" data-tooltip="male"
-                        for="gender-radio2">Mens</label>
-                    </div>
-                    <div class="col-sm-12 gender-col">
-                      <input
-                        class="gender-radio female-radio ng-pristine ng-untouched ng-valid ng-not-empty"
-                        id="gender-radio1" name="gender_email_signup" ng-focus="signup.gender='Female'"
-                        ng-model="signup.gender" type="radio" value="Female">
-                      <label class="gender-label female-label"
-                        data-tooltip="female" for="gender-radio1">Womens</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2 col-sm-3 col-xs-12 signup-col">
-                  <input class="btn btn-black btn-block"
-                    id="signup-footer" ng-disabled="!validEmail(signup.email) || !signup.gender" type="submit"
-                    value="Signup" disabled="disabled">
+                <div class="col-12 gender-col">
+                  <input
+                    class="gender-radio female-radio"
+                    id="gender-radio1" name="gender_email_signup"
+                    type="radio" value="Female">
+                  <label class="gender-label female-label"
+                    data-tooltip="female" for="gender-radio1">Womens</label>
                 </div>
               </div>
-            </form>
-            <div class="clearfix"></div>
-            <div class="privacy-notice grey-text">By providing your email address, you agree to our <a class="underline"
-                href="/pages/privacy">Privacy Policy</a> and <a class="underline"
-                href="/pages/terms">Terms of Service</a></div>
+            </div>
+            <div class="col-md-2 col-12 signup-col">
+              <input class="btn btn-black btn-block"
+                id="signup-footer" type="submit"
+                value="Signup" disabled="disabled">
+            </div>
           </div>
-        </div>
+        </form>
         <div class="clearfix"></div>
+        <div class="privacy-notice grey-text">By providing your email address, you agree to our <a class="underline"
+            href="/pages/privacy">Privacy Policy</a> and <a class="underline"
+            href="/pages/terms">Terms of Service</a></div>
       </div>
-    {% endunless %}
+      <div class="clearfix"></div>
+    </div>
+  {% endunless %}
   </div>
 </footer>
 

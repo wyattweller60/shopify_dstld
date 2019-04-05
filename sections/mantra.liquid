@@ -1,10 +1,6 @@
 <section>
-  <div class="col-sm-12 mantra hide-while-loading">
-    <div class="logo">
-      <img width="120px"
-        src="{{ section.settings.logo_url }}"
-        alt="Logo white">
-    </div>
+  <div class="col-sm-12 mantra">
+    {% include 'logo-container', url: section.settings.logo_url, height: '20px', alt: 'Logo White' %}
     <div class="beginning-text">
       {{ section.settings.beginning_text }}
     </div>
@@ -20,17 +16,31 @@
 
 <style>
   .beginning_text {
-
+    margin-top: 15px;
   }
   .main-text {
     margin: 50px 0;
   }
+
   .main-text p {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 36px;
     line-height: 1.2;
     letter-spacing: .5px;
+    margin: 15px 0;
+  }
+
+  .end-text {
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+    font-weight: 400;
+    color: white;
+  }
+
+  .end-text p {
+    margin-bottom: 8px;
   }
 
 </style>
@@ -43,7 +53,7 @@
       "type": "text",
       "id": "logo_url",
       "label": "Logo URL",
-      "default": "//d3d4ig6l9m673k.cloudfront.net/assets/logo/logo-white-d3f81b03bdec11819bfde8e9392bdc5a.png"
+      "default": "https://cdn.shopify.com/s/files/1/0054/9450/5546/files/logo-white.png?1433"
     },
     {
       "type": "richtext",

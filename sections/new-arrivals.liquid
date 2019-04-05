@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <div class="col-sm-12">
-  {% include 'headline-title', content: section.settings.headline_text %}
-  </div>
-  <div class="col-sm-12 tab-content">
-    <div class="product-grid tab-pane active" id="all">
-      {% for block in section.blocks %}
-        {%- assign product = all_products[block.settings.product] -%}
-        {% include 'collection-product', product: product %}
-      {% endfor %}
+  <div class="row">
+    {% include 'headline-title', content: section.settings.headline_text %}
+    <div class="col-12 col-md-12">
+      <div class="row">
+        {% for block in section.blocks %}
+          {%- assign product = all_products[block.settings.product] -%}
+          {% include 'collection-product', product: product %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
