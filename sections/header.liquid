@@ -1,63 +1,65 @@
 <div class="navbar navbar-default navbar-top navbar-fixed-top">
-  <div class="container desktop-only">
-    <div class="navbar-header">
-      <div class="navbar-brand-centered">
-        <a href="/" class="logo black-logo">
-          {% include 'logo-container', url: section.settings.logo_url, height: '70px', alt: 'Logo Black' %}
-        </a>
+  <div class="container-fluid desktop-only">
+    <div class="row">
+      <div class="navbar-header">
+        <div class="navbar-brand-centered">
+          <a href="/" class="logo black-logo">
+            {% include 'logo-container', url: section.settings.logo_url, height: '50px', alt: 'Logo Black' %}
+          </a>
+        </div>
+      </div>
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav ">
+          {% for link in linklists['main-left-menu'].links %}
+            <li class="dropdown">
+              <a class="nav-bold" href="{{ link.url }}">{{ link.title }}</a>
+              <ul class="dropdown-menu ">
+                <div class="menu-column">
+                  {% for childLink in link.links %}
+                    <li>
+                      <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
+                    </li>
+                  {% endfor %}
+                </div>
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if customer %}
+            <li class="dropdown " ><a class="dropdown-toggle" ng-href="/account"
+                href="/account"><span>Account</span></a>
+              {% for link in linklists['account'].links %}
+                <li> 
+                  <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
+                </li>
+              {% endfor %}
+            </li>
+            {%- comment -%}
+            <li class="investor-badge"><a alt="Investor Portal"
+              href="/investor"><span><i class="fa fa-line-chart" title="Investor Portal">&nbsp;</i></span></a></li>
+            {%- endcomment -%}
+          {% else %}
+            <li class="" ><a onclick="showUserModal()">Signup</a></li>
+            <li class="" ><a onclick="showUserModal('login')">Login</a></li>
+          {% endif %}
+          {% if cart.item_count > 0 %}
+            <li>
+              <a onclick="openCart()">
+                <span class="ng-binding ">
+                  <i class="fa fa-lg fa-shopping-cart" title="Cart"></i>({{ cart.item_count }})
+                </span>
+              </a>
+            </li>
+            <li ng-show="!isCartEmpty() &amp;&amp; oneShirt()" class="">
+              <a ng-click="openCart()" ng-disabled="updatingAmount == true"><span>Checkout</span></a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav ">
-        {% for link in linklists['main-left-menu'].links %}
-          <li class="dropdown">
-            <a class="nav-bold" href="{{ link.url }}">{{ link.title }}</a>
-            <ul class="dropdown-menu ">
-              <div class="menu-column">
-                {% for childLink in link.links %}
-                  <li>
-                    <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
-                  </li>
-                {% endfor %}
-              </div>
-            </ul>
-          </li>
-        {% endfor %}
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {% if customer %}
-          <li class="dropdown " ><a class="dropdown-toggle" ng-href="/account"
-              href="/account"><span>Account</span></a>
-            {% for link in linklists['account'].links %}
-              <li> 
-                <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
-              </li>
-            {% endfor %}
-          </li>
-          {%- comment -%}
-          <li class="investor-badge"><a alt="Investor Portal"
-            href="/investor"><span><i class="fa fa-line-chart" title="Investor Portal">&nbsp;</i></span></a></li>
-          {%- endcomment -%}
-        {% else %}
-          <li class="" ><a onclick="showUserModal()">Signup</a></li>
-          <li class="" ><a onclick="showUserModal('login')">Login</a></li>
-        {% endif %}
-        {% if cart.item_count > 0 %}
-          <li>
-            <a onclick="openCart()">
-              <span class="ng-binding ">
-                <i class="fa fa-lg fa-shopping-cart" title="Cart"></i>({{ cart.item_count }})
-              </span>
-            </a>
-          </li>
-          <li ng-show="!isCartEmpty() &amp;&amp; oneShirt()" class="">
-            <a ng-click="openCart()" ng-disabled="updatingAmount == true"><span>Checkout</span></a>
-          </li>
-        {% endif %}
-      </ul>
-    </div>
   </div>
-  <div class="container mobile-only text-center">
+  <div class="container-fluid mobile-only text-center">
     <div class="row">
       <a class="no-padding col-2" href="#mobile-menu" id="mobile-menu-trigger"
         ng-click="toggleSideMenu()" side="left" side-trigger="">
@@ -87,7 +89,7 @@
       "type": "text",
       "id": "logo_url",
       "label": "Logo URL",
-      "default": "https://cdn.shopify.com/s/files/1/0054/9450/5546/files/logo-black.jpg?1433"
+      "default": "https://cdn.shopify.com/s/files/1/0054/9450/5546/files/logo-black.jpg?1513"
 
     }
   ]

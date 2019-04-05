@@ -346,6 +346,12 @@ h4 {
   font-weight: 700;
 }
 
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #0A0A0A;
+}
+
 section {
   -moz-transition: .2s;
   -o-transition: .2s;
@@ -400,6 +406,234 @@ a {
   }
 }
 
+
+/* Form Elements
+------------------------------------------------ */
+input[type="text"],
+.select2-search input,
+.select2-container-multi
+.select2-choices,
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="datetime"],
+input[type="time"],
+input[type="url"],
+input[type="number"],
+input[type="tel"] {
+  border: 1px solid $black;
+  border-radius: 0px !important;
+  height: 44px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+select.text_input {
+  border: 1px solid $black;
+  border-radius: 0px !important;
+  height: 44px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+select.form-control {
+  border-radius: 0px !important;
+  -webkit-appearance: none !important;
+  -webkit-border-radius: 0px !important;
+  border: 1px solid $black;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+form textarea.form-control {
+
+  border: 1px solid $black;
+  border-radius: 0px !important;
+  padding: 10px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+form {
+  border-radius: 0px !important;
+  label {
+    margin-bottom: 3px;
+  }
+  .gender-label{
+    color: $black;
+  }
+  .note {
+    margin-top: 5px;
+    text-transform: lowercase;
+    letter-spacing: normal;
+    padding-right: 0.75em;
+    color: #555;
+  }
+  input {
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+      -webkit-text-fill-color: $black !important;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-control{
+    color: $black;
+    font-size: 13px;
+    font-family: inherit;
+    background-color: #FEFEFE;
+    border: 1px solid $black !important;
+    box-shadow: none !important;
+    outline: none !important;
+    &:focus {
+      outline: none;
+      opacity: 1;
+    }
+  }
+
+  &.show-errors .form-control.ng-invalid {
+    border: 1px solid $red;
+  }
+
+  ::-webkit-input-placeholder {
+    color: #CCC !important;
+  }
+
+}
+
+.form-action-row {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+
+.show-it {
+  opacity: 0;
+  display: block !important;
+}
+
+.control {
+	font-size: 12px;
+	position: relative;
+	display: block;
+	margin-bottom: 15px;
+	padding-left: 32px !important;
+	cursor: pointer;
+  font-weight: bold;
+  input {
+  	position: absolute;
+  	z-index: -1;
+  	opacity: 0;
+  }
+  .control--radio {
+    line-height: 28px !important;
+  }
+  .control__indicator {
+  	position: absolute;
+  	top: 2px;
+  	left: 0;
+  	width: 24px;
+  	height: 24px;
+    border-radius: 50%;
+  	border: 2px solid #ccc;
+    transition: 0.2s;
+    // @media (min-width: $screen-xs-min) {
+    //   ~ span:first-of-type {
+    //     float: left;
+    //     margin-left: -5px;
+    //   }
+    // }
+    &:after {
+      transition: 0.2s;
+      content: "";
+      width: 14px;
+      height: 14px;
+      top: 3px;
+      left: 3px;
+      background: #555;
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    &.small {
+      width: 18px;
+      height: 18px;
+      top: 4px;
+      &:after {
+        width: 10px;
+        height: 10px;
+        top: 2px;
+        left: 2px;
+      }
+    }
+  }
+  input:focus ~ .control__indicator,
+  input:checked ~ .control__indicator {
+  	&:after {
+      opacity: 1 !important;
+    }
+  }
+  &:hover input ~ .control__indicator {
+    &:after {
+      opacity: 0;
+    }
+  }
+  input {
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    left: 20px;
+    top: -4px;
+    cursor: pointer;
+  }
+}
+
+form {
+  input.underline {
+    background: none;
+    border: none !important;
+    box-shadow: none;
+    border-bottom: 1px solid #AAA !important;
+    padding: 5px;
+    margin-bottom: 15px;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid #000 !important;
+    }
+  }
+  &.form--light {
+    .control__indicator {
+    	border-color: $white;
+      &:after {
+        background: $white;
+      }
+    }
+    input.underline {
+      border-bottom-color: $white !important;
+      &::-webkit-input-placeholder {
+        color: #f1f1f1 !important;
+      }
+      &:-moz-placeholder { /* Firefox 18- */
+        color: #ccc;
+      }
+      &::-moz-placeholder {  /* Firefox 19+ */
+        color: #ccc;
+      }
+      &:-ms-input-placeholder {
+        color: #ccc;
+      }
+    }
+  }
+}
+
 //////////////////////////////////////////
 //        Element Specific Style        //
 //////////////////////////////////////////
@@ -424,10 +658,24 @@ a {
     .navbar-nav:first-child {
     
     }
+
+    .navbar-header {
+      float: left;
+
+      .navbar-brand-centered {
+        position: absolute;
+        left: 50%;
+        display: block;
+        width: 160px;
+        text-align: center;
+        margin-left: -80px;
+      }
+    }
   
     .navbar-collapse {
       background: $white;
       height: $header-height;
+      display: block;
     }
   }
   
@@ -464,6 +712,7 @@ a {
       transition: 0.2s;
       box-shadow: rgba(black, 0.1) 1px 1px 3px;
       z-index: 2000;
+      position: absolute;
 
       hr{
         margin-top: 10px;
@@ -548,14 +797,23 @@ a {
 
   .navbar-nav {
     padding-left: 40px;
+    float: left;
+    display: block;
+
     .nav-bold{
       font-weight: bold;
     }
 
     li {
+      float: left;
+      position: relative;
+      display: block;
+  
       a {
         @include text-sm-lc;
         color: $black;
+        padding-top: 15px;
+        padding-bottom: 15px;
 
         &:hover {
           color: $gray-dark;
@@ -568,6 +826,8 @@ a {
     li>a{
       padding-left: 0px;
       padding-right: 30px;
+      display: block;
+      position: relative;
     }
     li.wide-only {
       display: none !important;
@@ -585,6 +845,9 @@ a {
 
   .navbar-right{
     margin-right:0px;
+    float: right;
+    display: block;
+
     .fa-shopping-cart{
       vertical-align: -5%;
     }
@@ -806,7 +1069,7 @@ a {
 .home-section {
 	z-index: 2;
 	background: $white;
-	-webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
 	h3{
 		margin: 5px 0 30px;
 	}
@@ -834,6 +1097,10 @@ a {
 	}
 }
 
+.hero-section {
+  margin-bottom: 20px;
+  height: auto;
+}
 
 .home-main {
 	position: relative;
@@ -1080,6 +1347,17 @@ footer {
   padding: 0;
   text-align: center !important;
 
+  @media (min-width: $screen-sm-min) {
+    padding: 30px;
+  }
+
+  p.big {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
   li{
     padding: 5px 0;
   }
@@ -1090,9 +1368,6 @@ footer {
 
   a {
     font-size: 12px;
-    @media (min-width: $screen-sm-min) {
-			font-size: 14px;
-		}
   }
 
   .footer-menu {
@@ -1142,7 +1417,56 @@ footer {
 	      vertical-align: middle;
 	    }
 	  }
-	}
+  }
+
+  .footer-email-signup {
+    .email-col {
+      padding-left: 0;
+    }
+    .gender-col {
+      padding: 0;
+      position: relative;
+      bottom: -2px;
+      left: 0;
+      text-align: left;
+      margin-bottom: 5px; 
+
+      .gender-radio {
+        margin-left: 0;
+      }
+      @media (min-width: $screen-sm-min) {
+        left: 2px;
+      }
+    }
+    .privacy-notice {
+      text-align: left;
+    }
+    #gender-choice-footer {
+      margin-bottom: 20px;
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 0;
+      }
+    }
+    .signup-col {
+      padding: 0;
+      position: relative;
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 0;
+      }
+      margin-bottom: 30px;
+    }
+    #signup-footer {
+      border: none;
+      &[disabled] {
+        background-color: #ccc !important;
+        border: none;
+        border-radius: 0;
+        font-size: 12px;
+        padding: 15px;
+      }
+    }
+  }
+
   &.loading-footer {
   	position: absolute;
   	display: none;

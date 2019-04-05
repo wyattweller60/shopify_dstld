@@ -74,36 +74,38 @@
       <div class="footer-email-signup">
         <form onSubmit="emailSignup()">
           <p class="big text-left">Sign up for 10% off your first order.</p>
-          <div class="form-group row">
-            <div class="col-md-8 col-6 email-col">
-              <input
-                class="form-control underline"
-                name="email" placeholder="Email" type="email" required="required">
-            </div>
-            <div class="col-md-2 col-3 gender-col">
-              <div id="gender-choice-footer">
-                <div class="col-12 gender-col">
-                  <input
-                    class="gender-radio male-radio" id="gender-radio2"
-                    name="gender_email_signup" type="radio"
-                    value="Male">
-                  <label class="gender-label male-label" data-tooltip="male"
-                    for="gender-radio2">Mens</label>
-                </div>
-                <div class="col-12 gender-col">
-                  <input
-                    class="gender-radio female-radio"
-                    id="gender-radio1" name="gender_email_signup"
-                    type="radio" value="Female">
-                  <label class="gender-label female-label"
-                    data-tooltip="female" for="gender-radio1">Womens</label>
+          <div class="form-group container-fluid">
+            <div class="row">
+              <div class="col-md-8 col-6 email-col">
+                <input
+                  class="form-control underline"
+                  name="email" placeholder="Email" type="email" required="required">
+              </div>
+              <div class="col-md-2 col-3 gender-col">
+                <div id="gender-choice-footer">
+                  <div class="col-12 gender-col">
+                    <input
+                      class="gender-radio male-radio" id="gender-radio2"
+                      name="gender_email_signup" type="radio"
+                      value="Male">
+                    <label class="gender-label male-label" data-tooltip="male"
+                      for="gender-radio2">Mens</label>
+                  </div>
+                  <div class="col-12 gender-col">
+                    <input
+                      class="gender-radio female-radio"
+                      id="gender-radio1" name="gender_email_signup"
+                      type="radio" value="Female">
+                    <label class="gender-label female-label"
+                      data-tooltip="female" for="gender-radio1">Womens</label>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-2 col-12 signup-col">
-              <input class="btn btn-black btn-block"
-                id="signup-footer" type="submit"
-                value="Signup" disabled="disabled">
+              <div class="col-md-2 col-12 signup-col">
+                <input class="btn btn-black btn-block"
+                  id="signup-footer" type="submit"
+                  value="Signup" disabled="disabled">
+              </div>
             </div>
           </div>
         </form>
