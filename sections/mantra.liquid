@@ -1,6 +1,6 @@
 <section>
   <div class="col-sm-12 mantra">
-    {% include 'logo-container', url: section.settings.logo_url, height: '20px', alt: 'Logo White' %}
+    {% include 'logo-container', image: section.settings.white_logo_url, height: '20px', alt: 'Logo White' %}
     <div class="beginning-text">
       {{ section.settings.beginning_text }}
     </div>
@@ -51,10 +51,9 @@
   "name": "Mantra",
   "settings": [
     {
-      "type": "text",
-      "id": "logo_url",
-      "label": "Logo URL",
-      "default": "https://cdn.shopify.com/s/files/1/0054/9450/5546/files/logo-white.png?1433"
+      "type": "image_picker",
+      "id": "white_logo_url",
+      "label": "Logo URL"
     },
     {
       "type": "richtext",

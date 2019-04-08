@@ -49,7 +49,9 @@
     "sections": {
       "header": {
         "type": "header",
-        "settings": {}
+        "settings": {
+          "logo_url": ""
+        }
       },
       "slideshow": {
         "type": "slideshow",
@@ -92,11 +94,50 @@
       },
       "new-arrivals": {
         "type": "new-arrivals",
-        "settings": {}
+        "blocks": {
+          "1554772977852": {
+            "type": "new_arrival_product",
+            "settings": {
+              "product": "classic-button-down-shirt"
+            }
+          },
+          "1554772992758": {
+            "type": "new_arrival_product",
+            "settings": {
+              "product": "mens-skinny-jeans"
+            }
+          },
+          "1554772998910": {
+            "type": "new_arrival_product",
+            "settings": {
+              "product": "mens-slim-jeans"
+            }
+          },
+          "1554773154644": {
+            "type": "new_arrival_product",
+            "settings": {
+              "product": "modal-muscle-racerback-tank"
+            }
+          }
+        },
+        "block_order": [
+          "1554772992758",
+          "1554772998910",
+          "1554773154644",
+          "1554772977852"
+        ],
+        "settings": {
+          "headline_text": "Featured Products"
+        }
       },
       "mantra": {
         "type": "mantra",
-        "settings": {}
+        "settings": {
+          "logo_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0054\/9450\/5546\/files\/logo-white.png?1433",
+          "beginning_text": "<p>pronounced dis-til'd<\/p>",
+          "main_text": "<p><strong>We believe less is more<br><\/strong><\/p><p><strong>We think retail must evolve<\/strong><\/p><p><strong>We dream in black+white<\/strong><\/p><p><strong>We live in Denim<\/strong><\/p>",
+          "end_text": "<p><strong>Dis'till<\/strong><\/p><p>Extract the essential meaning or most important aspect of<\/p>"
+        }
       },
       "feature-row": {
         "type": "feature-row",
@@ -148,12 +189,12 @@
         "type": "hero",
         "settings": {
           "headline_text": "Premium Denim + Essentials. No Retail Markup.",
-          "left_collections_img": "//res.cloudinary.com/dstldjeans/image/fetch/f_jpg/https%3A%2F%2Fd4zpg1jklewne.cloudfront.net%2Fsteak%2Fgalleries%2F22%2Fwomens-1553127956307%2Fwomen.jpg%3F1553127956",
-          "right_collections_img": "//res.cloudinary.com/dstldjeans/image/fetch/f_jpg/https%3A%2F%2Fd4zpg1jklewne.cloudfront.net%2Fsteak%2Fgalleries%2F22%2Fmens-1553127984351%2Fmen.jpg%3F1553127984",
-          "right_collections_title": "Men",
-          "left_collections_title": "Women",
-          "right_collections_url": "/collections/men",
-          "left_collections_url": "/collections/women"
+          "left_cta": "Men",
+          "left_image": "shopify:\/\/shop_images\/men.jpg",
+          "left_url": "shopify:\/\/collections\/men",
+          "right_cta": "Women",
+          "right_image": "shopify:\/\/shop_images\/https---d4zpg1jklewne.cloudfront.net-steak-galleries-22-women-3-1554767207228-women.jpg_1554767207.jpg",
+          "right_link": "shopify:\/\/collections\/coming-soon"
         }
       }
     },
