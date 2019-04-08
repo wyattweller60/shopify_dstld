@@ -2611,6 +2611,8 @@ theme.customerTemplates = (function() {
     this.$LoginHeading.on('blur', function() {
       $(this).removeAttr('tabindex');
     });
+
+    $('#sidebar-modal').easytabs();
   }
 
   /**

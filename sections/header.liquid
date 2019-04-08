@@ -4,26 +4,50 @@
       <div class="navbar-header">
         <div class="navbar-brand-centered">
           <a href="/" class="logo black-logo">
-            {% include 'logo-container', url: section.settings.logo_url, height: '50px', alt: 'Logo Black' %}
+            {% include 'logo-container', image: section.settings.logo_url, height: '50px', alt: 'Logo Black' %}
           </a>
         </div>
       </div>
       <div class="navbar-collapse">
         <ul class="nav navbar-nav ">
-          {% for link in linklists['main-left-menu'].links %}
+          {% for link in linklists['main-left-menu-1'].links %}
             <li class="dropdown">
               <a class="nav-bold" href="{{ link.url }}">{{ link.title }}</a>
-              <ul class="dropdown-menu ">
-                <div class="menu-column">
-                  {% for childLink in link.links %}
-                    <li>
-                      <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
-                    </li>
+              <div class="container">
+                <ul class="dropdown-menu row">
+                  {% for subLink in linklists[link.title].links %}
+                    <div class="menu-column">
+                      {% for childLink in subLink.links %}
+                        <li>
+                          <a title="{{ childLink.title }}" href="{{ childLink.url }}"><h4>{{ childLink.title }}</h4></a>
+                        </li>
+                        {% for grandChildLink in childLink.links %}
+                          <li>
+                            <a title="{{ grandChildLink.title }}" href="{{ grandChildLink.url }}"><strong>{{ grandChildLink.title }}</strong></a>
+                          </li>
+                        {% endfor %}
+                      {% endfor %}
+                    </div>
                   {% endfor %}
-                </div>
-              </ul>
+                </ul>
+              </div>
             </li>
           {% endfor %}
+          {% assign aboutLink = linklists['about'] %}
+          <li class="dropdown">
+            <a class="nav-bold" href="{{ aboutLink.url }}">{{ aboutLink.title }}</a>
+            <div class="container">
+              <ul class="dropdown-menu about row">
+                  <div class="menu-column">
+                    {% for grandChildLink in aboutLink.links %}
+                      <li>
+                        <a title="{{ grandChildLink.title }}" href="{{ grandChildLink.url }}"><strong>{{ grandChildLink.title }}</strong></a>
+                      </li>
+                    {% endfor %}
+                  </div>
+              </ul>
+            </div>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if customer %}
@@ -61,13 +85,12 @@
   </div>
   <div class="container-fluid mobile-only text-center">
     <div class="row">
-      <a class="no-padding col-2" href="#mobile-menu" id="mobile-menu-trigger"
-        ng-click="toggleSideMenu()" side="left" side-trigger="">
+      <a class="no-padding col-2" id="mobile-hamburger-btn">
         <i class="fa fa-bars"></i>
       </a>
       <div class="col-8">
         <a href="/" class="logo black-logo">
-          {% include 'logo-container', url: section.settings.logo_url, height: '50px', alt: 'Logo Black' %}
+          {% include 'logo-container', image: section.settings.logo_url, height: '50px', alt: 'Logo Black' %}
         </a>
       </div>
       {% if cart.item_count > 0 %}
@@ -78,19 +101,64 @@
       {% endif %}
     </div>
   </div>
+  <div id="sidebar-modal" class="tab-container mobile-sidebar mobile-only" >
+    <button type="button" class="modal__close js-modal-close text-link">
+      {% include 'icon-close' %}
+    </button>
+    <ul class='etabs'>
+      {% for link in linklists['main-left-menu-1'].links %}
+          <li class='tab'><a href="#{{ link.title }}">{{ link.title }}</a></li>
+      {% endfor %}  
+    </ul>
+    {% for link in linklists['main-left-menu-1'].links %}
+      <div id="{{ link.title }}">
+        {% for subLink in linklists[link.title].links %}
+          <ul class="mobile-menu-column">
+            {% for childLink in subLink.links %}
+              <li>
+                <a title="{{ childLink.title }}" href="{{ childLink.url }}"><h4>{{ childLink.title }}</h4></a>
+              </li>
+              {% for grandChildLink in childLink.links %}
+                <li>
+                  <a title="{{ grandChildLink.title }}" href="{{ grandChildLink.url }}"><strong>{{ grandChildLink.title }}</strong></a>
+                </li>
+              {% endfor %}
+            {% endfor %}
+            {% assign aboutLink = linklists['about'] %}
+            {% for childLink in aboutLink.links %}
+              <li>
+                <a title="{{ childLink.title }}" href="{{ childLink.url }}"><h4>{{ childLink.title }}</h4></a>
+              </li>
+            {% endfor %}
+            <li>
+              <a title="login" href="/login"><h4>Join / Login</h4></a>
+            </li>
+          </ul>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 </div>
 
+{% javascript %}
+  $('#sidebar-modal .modal__close').on('click', function() {
+    $('#sidebar-modal').removeClass('show');
+    $('body').css('overflow', 'auto');
+  });
+  $('#mobile-hamburger-btn').on('click', function() {
+    $('#sidebar-modal').addClass('show');
+    $('body').css('overflow', 'hidden');
+  });
+{% endjavascript %}
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
     {
-      "type": "text",
+      "type": "image_picker",
       "id": "logo_url",
-      "label": "Logo URL",
-      "default": "https://cdn.shopify.com/s/files/1/0054/9450/5546/files/logo-black.jpg?1513"
-
+      "label": "Logo URL"
     }
   ]
 }
