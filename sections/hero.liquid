@@ -2,8 +2,8 @@
   {% include 'headline-title', content: section.settings.headline_text %}
   <section class="home-main container-fluid">
     <div class="row">
-      {% include 'hero-gender-img-link', title: section.settings.left_collections_title, img_url: section.settings.left_collections_img, link: section.settings.left_collections_url %}
-      {% include 'hero-gender-img-link', title: section.settings.right_collections_title, img_url: section.settings.right_collections_img, link: section.settings.right_collections_url %}
+      {% include 'hero-gender-img-link', title: section.settings.left_cta, link: section.settings.left_link, image: section.settings.left_image | img_url %}
+      {% include 'hero-gender-img-link', title: section.settings.right_cta, link: section.settings.right_link, image: section.settings.right_image | img_url' %}
     </div>
   </section>
 </div>
@@ -28,19 +28,19 @@
     },
     {
       "type": "text",
-      "id": "left_collections_title",
-      "label": "Title",
+      "id": "left_cta",
+      "label": "Call to Action",
       "default": "Your text here"
     },
     {
-      "type": "text",
-      "id": "left_collections_img",
-      "label": "Feature Image"
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image"
     },
     {
       "type": "url",
-      "id": "left_collections_url",
-      "label": "Collections Link"
+      "id": "left_url",
+      "label": "Left Link"
     },
     {
       "type": "header",
@@ -48,19 +48,19 @@
     },
     {
       "type": "text",
-      "id": "right_collections_title",
-      "label": "Title",
+      "id": "right_cta",
+      "label": "Call to Action",
       "default": "Your text here"
     },
     {
-      "type": "text",
-      "id": "right_collections_img",
-      "label": "Feature Image"
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image"
     },
     {
       "type": "url",
-      "id": "right_collections_url",
-      "label": "Collections Link"
+      "id": "right_link",
+      "label": "Right Link"
     }
   ]
 }
