@@ -76,6 +76,18 @@ a {
 .no-padding {
   padding: 0;
 }
+.collection-name {
+  margin-top: 0;
+  margin-bottom: 0;
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
+.collection-description-text {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .mobile-only {
   display: block !important;
   @media (min-width: $screen-sm-min) {
@@ -725,30 +737,19 @@ footer {
   }
 }
 
-// Collection Description Text
-.collection-name {
-  margin-top: 0;
-  margin-bottom: 0;
-  h1 {
-    font-size: 24px;
-    font-weight: 700;
-  }
-}
-.collection-description-text {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 // Collection Page
 .collection-page {
   .logo-container {
     width: 100%;
+    padding: 0 5px;
   }
   .collection-name {
     margin-top: 30px;
+    padding: 0 5px;
   }
   .collection-description-text {
     margin-top: 30px;
+    padding: 0 5px;
   } 
   .product-list {
     margin-top: 30px;
