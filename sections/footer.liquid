@@ -62,7 +62,7 @@
         </div>
         <br>
         <div class="btn-to-top mobile-only">
-          <a class="btn btn-default" onClick="scrollToTop()">
+          <a class="btn btn-default">
             <span
               class="fa fa-angle-up"></span>
           </a>
@@ -81,7 +81,7 @@
                   class="form-control underline"
                   name="email" placeholder="Email" type="email" required="required">
               </div>
-              <div class="col-md-2 col-3 gender-col">
+              <div class="col-md-2 col-3 no-padding">
                 <div id="gender-choice-footer">
                   <div class="col-12 gender-col">
                     <input
@@ -103,16 +103,18 @@
               </div>
               <div class="col-md-2 col-12 signup-col">
                 <input class="btn btn-black btn-block"
-                  id="signup-footer" type="submit"
+                  id="signup-footer-submit-btn" type="submit"
                   value="Signup" disabled="disabled">
               </div>
             </div>
           </div>
         </form>
         <div class="clearfix"></div>
-        <div class="privacy-notice grey-text">By providing your email address, you agree to our <a class="underline"
+        <div class="privacy-notice grey-text">
+          By providing your email address, you agree to our <a class="underline"
             href="/pages/privacy">Privacy Policy</a> and <a class="underline"
-            href="/pages/terms">Terms of Service</a></div>
+            href="/pages/terms">Terms of Service</a>
+        </div>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -120,6 +122,11 @@
   </div>
 </footer>
 
+{% javascript %}
+  $('.btn-to-top a').on('click', function() {
+    $("html, body").animate({ scrollTop: 0 }, "fast");
+  });
+{% endjavascript %}
 
 {% schema %}
 {
