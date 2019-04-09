@@ -92,29 +92,29 @@
           "autorotate_speed": 5
         }
       },
-      "new-arrivals": {
-        "type": "new-arrivals",
+      "home-product-grid": {
+        "type": "product-grid",
         "blocks": {
           "1554772977852": {
-            "type": "new_arrival_product",
+            "type": "product_grid_item",
             "settings": {
               "product": "classic-button-down-shirt"
             }
           },
           "1554772992758": {
-            "type": "new_arrival_product",
+            "type": "product_grid_item",
             "settings": {
               "product": "mens-skinny-jeans"
             }
           },
           "1554772998910": {
-            "type": "new_arrival_product",
+            "type": "product_grid_item",
             "settings": {
               "product": "mens-slim-jeans"
             }
           },
           "1554773154644": {
-            "type": "new_arrival_product",
+            "type": "product_grid_item",
             "settings": {
               "product": "modal-muscle-racerback-tank"
             }
@@ -200,7 +200,7 @@
     },
     "content_for_index": [
       "hero",
-      "new-arrivals",
+      "home-product-grid",
       "mantra"
     ]
   },

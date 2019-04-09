@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    {% include 'headline-title', content: section.settings.headline_text %}
+    {% include 'headline-title', content: section.settings.headline_text, customClass: "pl-3" %}
     <div class="col-12 col-md-12">
       <div class="row">
         {% for block in section.blocks %}
@@ -14,19 +14,23 @@
 
 {% schema %}
 {
-  "name": "New Arrivals",
+  "name": "Product Grid",
   "settings": [
     {
       "type": "text",
       "id": "headline_text",
-      "label": "Section Title",
-      "default": "New Arrival"
+      "label": "Collection Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description_text",
+      "label": "Collection Description"
     }
   ],
   "blocks": [
     {
-      "type": "new_arrival_product",
-      "name": "New Arrival Product",
+      "type": "product_grid_item",
+      "name": "New Product",
       "settings": [
         {
           "type": "product",

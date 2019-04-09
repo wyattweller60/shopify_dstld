@@ -1,13 +1,13 @@
-<div class="col-md-3 col-6 product">
+<div class="col-md-4 col-6 product">
   <div class="img">
     <a class="product-link" href="{{ product.url }}">
       <div class="square-product-img">
         <img on-scroll-to="ll.scrollHandler" alt="{{ product.title }}"
           aot="true" class="desktop fst" ng-lazy-load="" scroll-offset="200"
-          src="{{ product.featured_image | img_url: '300x300' }}"
+          src="{{ product.featured_image | img_url: '1024x' }}"
           width="100%">
         <img alt="{{ product.title }}" class="desktop snd"
-          src="{{ product.images[1] | img_url: '300x300' }}"
+          src="{{ product.images[1] | img_url: '1024x' }}"
           width="100%">
         <img class="bg-img"
           src="//d3d4ig6l9m673k.cloudfront.net/assets/preloaders/dstld-loader-c3c41166b90c235fed5f014602ef1d59.gif"
