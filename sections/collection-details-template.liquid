@@ -1,15 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    {% assign collectionImage = section.settings.collection_image %}
-    {% if collectionImage %}
-      {% include 'logo-container', image: collectionImage, width: '100%', alt: 'Collection Logo' %}
-    {% endif %}
     {% include 'headline-title', content: section.settings.headline_text, customClass: "pl-3" %}
     {% include 'description-input', content: section.settings.description_text, customClass: "" %}
-    <div class="col-12 col-md-12 product-list">
+    <div class="col-12 col-md-12">
       <div class="row">
-        {% for block in section.blocks %}
-          {%- assign product = all_products[block.settings.product] -%}
+        {% for product in all_products %}
           {% include 'collection-product', product: product %}
         {% endfor %}
       </div>
@@ -19,13 +14,8 @@
 
 {% schema %}
 {
-  "name": "Product Grid",
+  "name": "Collection Details",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "collection_image",
-      "label": "Collection Image"
-    },
     {
       "type": "text",
       "id": "headline_text",
