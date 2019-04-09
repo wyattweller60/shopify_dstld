@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-top navbar-fixed-top">
+<div class="navbar">
   <div class="container-fluid desktop-only">
     <div class="row">
       <div class="navbar-header">
@@ -111,27 +111,27 @@
       {% endfor %}  
     </ul>
     {% for link in linklists['main-left-menu-1'].links %}
-      <div id="{{ link.title }}">
+      <div id="{{ link.title }}" class="mobile-menu-column">
         {% for subLink in linklists[link.title].links %}
-          <ul class="mobile-menu-column">
+          <ul>
             {% for childLink in subLink.links %}
-              <li>
-                <a title="{{ childLink.title }}" href="{{ childLink.url }}"><h4>{{ childLink.title }}</h4></a>
+              <li class="mobile-menu-list-item mobile-menu-list-item__title">
+                <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
               </li>
               {% for grandChildLink in childLink.links %}
-                <li>
-                  <a title="{{ grandChildLink.title }}" href="{{ grandChildLink.url }}"><strong>{{ grandChildLink.title }}</strong></a>
+                <li class="mobile-menu-list-item">
+                  <a title="{{ grandChildLink.title }}" href="{{ grandChildLink.url }}">{{ grandChildLink.title }}</a>
                 </li>
               {% endfor %}
             {% endfor %}
             {% assign aboutLink = linklists['about'] %}
             {% for childLink in aboutLink.links %}
-              <li>
-                <a title="{{ childLink.title }}" href="{{ childLink.url }}"><h4>{{ childLink.title }}</h4></a>
+              <li class="mobile-menu-list-item mobile-menu-list-item__title">
+                <a title="{{ childLink.title }}" href="{{ childLink.url }}">{{ childLink.title }}</a>
               </li>
             {% endfor %}
-            <li>
-              <a title="login" href="/login"><h4>Join / Login</h4></a>
+            <li class="mobile-menu-list-item mobile-menu-list-item__title">
+              <a title="login" href="/login">Join / Login</a>
             </li>
           </ul>
         {% endfor %}
