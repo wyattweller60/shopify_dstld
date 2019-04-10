@@ -95,18 +95,6 @@
       "home-product-grid": {
         "type": "product-grid",
         "blocks": {
-          "1554772977852": {
-            "type": "product_grid_item",
-            "settings": {
-              "product": "classic-button-down-shirt"
-            }
-          },
-          "1554772992758": {
-            "type": "product_grid_item",
-            "settings": {
-              "product": "mens-skinny-jeans"
-            }
-          },
           "1554772998910": {
             "type": "product_grid_item",
             "settings": {
@@ -116,24 +104,31 @@
           "1554773154644": {
             "type": "product_grid_item",
             "settings": {
-              "product": "modal-muscle-racerback-tank"
+              "product": ""
+            }
+          },
+          "1554772977852": {
+            "type": "product_grid_item",
+            "settings": {
+              "product": "classic-button-down-shirt"
             }
           }
         },
         "block_order": [
-          "1554772992758",
           "1554772998910",
           "1554773154644",
           "1554772977852"
         ],
         "settings": {
-          "headline_text": "Featured Products"
+          "collection_image": "",
+          "headline_text": "Featured Products",
+          "description_text": ""
         }
       },
       "mantra": {
         "type": "mantra",
         "settings": {
-          "logo_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0054\/9450\/5546\/files\/logo-white.png?1433",
+          "white_logo_url": "",
           "beginning_text": "<p>pronounced dis-til'd<\/p>",
           "main_text": "<p><strong>We believe less is more<br><\/strong><\/p><p><strong>We think retail must evolve<\/strong><\/p><p><strong>We dream in black+white<\/strong><\/p><p><strong>We live in Denim<\/strong><\/p>",
           "end_text": "<p><strong>Dis'till<\/strong><\/p><p>Extract the essential meaning or most important aspect of<\/p>"
@@ -191,15 +186,35 @@
           "headline_text": "Premium Denim + Essentials. No Retail Markup.",
           "left_cta": "Men",
           "left_image": "shopify:\/\/shop_images\/men.jpg",
-          "left_url": "shopify:\/\/collections\/men",
+          "left_url": "",
           "right_cta": "Women",
           "right_image": "shopify:\/\/shop_images\/https---d4zpg1jklewne.cloudfront.net-steak-galleries-22-women-3-1554767207228-women.jpg_1554767207.jpg",
           "right_link": "shopify:\/\/collections\/coming-soon"
+        }
+      },
+      "1554856997516": {
+        "type": "product-grid",
+        "blocks": {
+          "1554857007404": {
+            "type": "product_grid_item",
+            "settings": {
+              "product": "modal-muscle-racerback-tank"
+            }
+          }
+        },
+        "block_order": [
+          "1554857007404"
+        ],
+        "settings": {
+          "collection_image": "",
+          "headline_text": "Featured Tees",
+          "description_text": ""
         }
       }
     },
     "content_for_index": [
       "hero",
+      "1554856997516",
       "home-product-grid",
       "mantra"
     ]
