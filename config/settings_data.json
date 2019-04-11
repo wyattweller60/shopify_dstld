@@ -50,7 +50,7 @@
       "header": {
         "type": "header",
         "settings": {
-          "logo_url": ""
+          "logo_url": "shopify:\/\/shop_images\/logo-black.png"
         }
       },
       "slideshow": {
@@ -104,7 +104,7 @@
           "1554773154644": {
             "type": "product_grid_item",
             "settings": {
-              "product": ""
+              "product": "modal-muscle-racerback-tank"
             }
           },
           "1554772977852": {
@@ -128,7 +128,7 @@
       "mantra": {
         "type": "mantra",
         "settings": {
-          "white_logo_url": "",
+          "white_logo_url": "shopify:\/\/shop_images\/logo-white.png",
           "beginning_text": "<p>pronounced dis-til'd<\/p>",
           "main_text": "<p><strong>We believe less is more<br><\/strong><\/p><p><strong>We think retail must evolve<\/strong><\/p><p><strong>We dream in black+white<\/strong><\/p><p><strong>We live in Denim<\/strong><\/p>",
           "end_text": "<p><strong>Dis'till<\/strong><\/p><p>Extract the essential meaning or most important aspect of<\/p>"
@@ -208,6 +208,14 @@
         "settings": {
           "collection_image": "",
           "headline_text": "Featured Tees",
+          "description_text": ""
+        }
+      },
+      "product-grid": {
+        "type": "product-grid",
+        "settings": {
+          "collection_image": "",
+          "headline_text": "",
           "description_text": ""
         }
       }
