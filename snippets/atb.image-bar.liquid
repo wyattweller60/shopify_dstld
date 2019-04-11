@@ -1,0 +1,289 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": {
+    "de": "Galerie",
+    "en": "Gallery",
+    "es": "Galería",
+    "fr": "Galerie",
+    "it": "Galleria",
+    "ja": "ギャラリー",
+    "pt-BR": "Galeria"
+  },
+  "class": "index-section index-section--flush",
+  "max_blocks": 4,
+  "id": "image-bar",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_section_height",
+      "label": {
+        "de": "Bereichs-Höhe",
+        "en": "Section height",
+        "es": "Altura de la sección",
+        "fr": "Hauteur de la section",
+        "it": "Altezza sezione",
+        "ja": "セクションの高さ",
+        "pt-BR": "Altura da seção"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "de": "Extra klein",
+            "en": "Extra Small",
+            "es": "Extra pequeña",
+            "fr": "Très petite",
+            "it": "Molto piccola",
+            "ja": "極小",
+            "pt-BR": "Muito pequeno"
+          },
+          "value": "x-small"
+        },
+        {
+          "label": {
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeña",
+            "fr": "Petite",
+            "it": "Piccolo",
+            "ja": "小",
+            "pt-BR": "Pequeno"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "de": "Mittel",
+            "en": "Medium",
+            "es": "Mediana",
+            "fr": "Moyenne",
+            "it": "Medio",
+            "ja": "中",
+            "pt-BR": "Médio"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fr": "Grande",
+            "it": "Grande",
+            "ja": "大",
+            "pt-BR": "Grande"
+          },
+          "value": "large"
+        },
+        {
+          "label": {
+            "de": "Extra groß",
+            "en": "Extra Large",
+            "es": "Extra grande",
+            "fr": "Très grande",
+            "it": "Molto grande",
+            "ja": "特大",
+            "pt-BR": "Muito grande"
+          },
+          "value": "x-large"
+        }
+      ],
+      "info": ""
+    },
+    {
+      "type": "image_picker",
+      "id": "block_image",
+      "label": {
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "pt-BR": "Imagem"
+      },
+      "repeatable": "Image",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_alignment",
+      "label": {
+        "de": "Fotoausrichtung",
+        "en": "Image alignment",
+        "es": "Alineación de imagen",
+        "fr": "Alignement de l'image",
+        "it": "Allineamento immagine",
+        "ja": "画像アラインメント",
+        "pt-BR": "Alinhamento da imagem"
+      },
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": {
+            "de": "Oben",
+            "en": "Top",
+            "es": "Superior",
+            "fr": "Haut",
+            "it": "Alto",
+            "ja": "上",
+            "pt-BR": "Acima"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "de": "Mitte",
+            "en": "Middle",
+            "es": "Centrada",
+            "fr": "Milieu",
+            "it": "Centrale",
+            "ja": "中央",
+            "pt-BR": "Meio"
+          }
+        },
+        {
+          "value": "bottom",
+          "label": {
+            "de": "Unten",
+            "en": "Bottom",
+            "es": "Inferior",
+            "fr": "Bas",
+            "it": "Basso",
+            "ja": "下",
+            "pt-BR": "Abaixo"
+          }
+        }
+      ],
+      "repeatable": "Image",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_link",
+      "label": {
+        "de": "Link",
+        "en": "Link",
+        "es": "Enlace",
+        "fr": "Lien",
+        "it": "Link",
+        "ja": "リンク",
+        "pt-BR": "Link"
+      },
+      "info": "",
+      "repeatable": "Image"
+    },
+    {
+      "type": "text",
+      "id": "block_cta_label",
+      "label": {
+        "de": "Unterschrift",
+        "en": "Caption",
+        "es": "Leyenda",
+        "fr": "Légende",
+        "it": "Didascalia",
+        "ja": "キャプション",
+        "pt-BR": "Legenda"
+      },
+      "repeatable": "Image",
+      "info": ""
+    }
+  ],
+  "warnings": [
+    "repeating image fields may not be properly handled"
+  ]
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{% include 'atb-render' field:'section_id' %}
+{% assign section_id = val %}
+{% include 'atb-render' field:'atb_section_height' %}
+{% assign atb_section_height = val %}
+{% include 'atb-render' field:'block_image' %}
+{% assign block_image = val %}
+{% include 'atb-render' field:'block_alignment' %}
+{% assign block_alignment = val %}
+{% include 'atb-render' field:'block_link' %}
+{% assign block_link = val %}
+{% include 'atb-render' field:'block_cta_label' %}
+{% assign block_cta_label = val %}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section index-section index-section--flush">
+<div class="grid grid--no-gutters image-bar image-bar--{{ atb_section_height }}">
+  {% case block_image.size %}
+    {% when 1 %}
+      {%- assign column_size = '' -%}
+    {% when 2 %}
+      {%- assign column_size = 'medium-up--one-half' -%}
+    {% when 3 %}
+      {%- assign column_size = 'medium-up--one-third' -%}
+    {% else %}
+      {%- assign column_size = 'medium-up--one-quarter' -%}
+  {% endcase %}
+
+  {% for block_image0 in block_image %}
+{% assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last %}
+{% assign my_image0 = images[my_image_key0] %}
+    <div class="grid__item {{ column_size }} js" {{ block.shopify_attributes }}>
+      {% if block_link[forloop.index0] != blank %}
+        <a class="image-bar__link" href="{{ block_link[forloop.index0] }}">
+          <div class="image-bar__item box ratio-container lazyload"
+               data-bgset="{% include 'bgset', image: my_image0 %}"
+               data-sizes="auto"
+               data-parent-fit="cover"
+               style="background-position: {{ block_alignment[forloop.index0] }}; background-image: url('{{ my_image0 | img_url: '300x300' }});">
+      {% elsif my_image0 != blank %}
+        <div class="image-bar__item image-bar__item--{{ block.id }} box ratio-container lazyload"
+             data-bgset="{% include 'bgset', image: my_image0 %}"
+             data-sizes="auto"
+             data-parent-fit="cover"
+             style="background-position: {{ block_alignment[forloop.index0] }}; background-image: url('{{ my_image0 | img_url: '300x300' }});">
+      {% else %}
+        <div class="image-bar__item">
+      {% endif %}
+      <div class="image-bar__content{% if block_cta_label[forloop.index0] != blank or block_link[forloop.index0] != blank %} image-bar__overlay{% endif %}">
+        {% if my_image0 == blank %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+
+        {% if block_cta_label[forloop.index0] != blank %}
+          <div class="image-bar__text">
+            <h3 class="image-bar__caption">{{ block_cta_label[forloop.index0] | escape }}</h3>
+          </div>
+        {% endif %}
+      </div>
+      {% if block_link[forloop.index0] != blank %}
+        </div></a>
+      {% else %}
+        </div>
+      {% endif %}
+    </div>
+    <noscript>
+      <div class="grid__item {{ column_size }}" {{ block.shopify_attributes }}>
+        <div class="image-bar__item image-bar__item--{{ block.id }}" style="background-image: url({{ my_image0 | img_url: '2048x' }});"></div>
+      </div>
+    </noscript>
+  {% endfor %}
+</div>
+
+{% if block_image.size == 0 %}
+  {% include 'no-blocks' %}
+{% endif %}
+
+
+
+
+</section>

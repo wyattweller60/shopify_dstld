@@ -1,0 +1,561 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": {
+    "de": "Slideshow",
+    "en": "Slideshow",
+    "es": "Diapositivas",
+    "fr": "Diaporama",
+    "it": "Presentazione",
+    "ja": "スライドショー",
+    "pt-BR": "Apresentação de slides"
+  },
+  "class": "index-section index-section--flush",
+  "max_blocks": 4,
+  "id": "slideshow",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "atb_autoplay",
+      "label": {
+        "de": "Auto-rotieren der Slides",
+        "en": "Auto-rotate slides",
+        "es": "Rotar las diapositivas automáticamente",
+        "fr": "Rotation automatique des diapositives",
+        "it": "Ruota slide automaticamente",
+        "ja": "スライドの自動切り替え",
+        "pt-BR": "Rodar os slides automaticamente"
+      },
+      "default": true,
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_autoplay_speed",
+      "label": {
+        "de": "Slides überall ändern",
+        "en": "Change slides every",
+        "es": "Cambiar diapositivas cada",
+        "fr": "Changer de diapositive toutes les",
+        "it": "Cambia slide ogni",
+        "ja": "スライドを変更する間隔",
+        "pt-BR": "Mudar os slides a cada"
+      },
+      "max": 10,
+      "min": 5,
+      "step": 1,
+      "unit": {
+        "de": "sek",
+        "en": "sec",
+        "es": "seg",
+        "fr": "sec",
+        "it": "sec",
+        "ja": "秒",
+        "pt-BR": "s"
+      },
+      "default": 7,
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_slideshow_height",
+      "label": {
+        "de": "Höhe des Bereichs",
+        "en": "Section height",
+        "es": "Altura de la sección",
+        "fr": "Taille de la section",
+        "it": "Altezza sezione",
+        "ja": "セクションの高さ",
+        "pt-BR": "Altura da seção"
+      },
+      "default": "small",
+      "options": [
+        {
+          "label": {
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeña",
+            "fr": "Petite",
+            "it": "Piccolo",
+            "ja": "小",
+            "pt-BR": "Pequeno"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "de": "Mittel",
+            "en": "Medium",
+            "es": "Mediana",
+            "fr": "Moyenne",
+            "it": "Medio",
+            "ja": "中",
+            "pt-BR": "Médio"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fr": "Grande",
+            "it": "Grande",
+            "ja": "大",
+            "pt-BR": "Grande"
+          },
+          "value": "large"
+        }
+      ],
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_text_size",
+      "label": {
+        "de": "Textgröße",
+        "en": "Text size",
+        "es": "Tamaño del texto",
+        "fr": "Taille du texte",
+        "it": "Dimensione testo",
+        "ja": "文字サイズ",
+        "pt-BR": "Tamanho do texto"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "de": "Mittel",
+            "en": "Medium",
+            "es": "Mediano",
+            "fr": "Moyenne",
+            "it": "Medio",
+            "ja": "中",
+            "pt-BR": "Médio"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fr": "Grande",
+            "it": "Grande",
+            "ja": "大",
+            "pt-BR": "Grande"
+          },
+          "value": "large"
+        }
+      ],
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_type",
+      "label": "Block Type",
+      "info": "",
+      "default": "",
+      "options": [
+        {
+          "value": "image",
+          "label": "image"
+        },
+        {
+          "value": "video",
+          "label": "video"
+        }
+      ],
+      "repeatable": "block"
+    },
+    {
+      "type": "image_picker",
+      "id": "block_image",
+      "label": {
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "pt-BR": "Imagem"
+      },
+      "repeatable": "block",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_alignment",
+      "label": {
+        "de": "Fotoausrichtung",
+        "en": "Image alignment",
+        "es": "Alineación de imagen",
+        "fr": "Alignement de l'image",
+        "it": "Allineamento immagine",
+        "ja": "画像アラインメント",
+        "pt-BR": "Alinhamento da imagem"
+      },
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": {
+            "de": "Oben",
+            "en": "Top",
+            "es": "Superior",
+            "fr": "Haut",
+            "it": "Alto",
+            "ja": "上",
+            "pt-BR": "Acima"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "de": "Mitte",
+            "en": "Middle",
+            "es": "Centrada",
+            "fr": "Milieu",
+            "it": "Centrale",
+            "ja": "中央",
+            "pt-BR": "Meio"
+          }
+        },
+        {
+          "value": "bottom",
+          "label": {
+            "de": "Unten",
+            "en": "Bottom",
+            "es": "Inferior",
+            "fr": "Bas",
+            "it": "Basso",
+            "ja": "下",
+            "pt-BR": "Abaixo"
+          }
+        }
+      ],
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:image"
+    },
+    {
+      "type": "text",
+      "id": "block_title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      },
+      "default": {
+        "de": "Foto-Slide",
+        "en": "Image slide",
+        "es": "Diapositiva de imagen",
+        "fr": "Diapositive (image)",
+        "it": "Slide immagine",
+        "ja": "画像スライド",
+        "pt-BR": "Slide de imagem"
+      },
+      "repeatable": "block",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_subheading",
+      "label": {
+        "de": "Untertitel",
+        "en": "Subheading",
+        "es": "Subtítulo",
+        "fr": "Sous-titre",
+        "it": "Sottotitolo",
+        "ja": "小見出し",
+        "pt-BR": "Subtítulo"
+      },
+      "default": {
+        "de": "Erzählen Sie Ihre Geschichte mit Videos und Fotos",
+        "en": "Tell your brand's story through video and images",
+        "es": "Cuenta la historia de tu marca a través de videos e imágenes",
+        "fr": "Racontez votre histoire avec des vidéos et des images",
+        "it": "Racconta la storia del tuo brand con video e immagini",
+        "ja": "あなたのブランドのストーリーをビデオや画像で伝える",
+        "pt-BR": "Conte a história da sua marca com vídeos e imagens"
+      },
+      "repeatable": "block",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_link",
+      "label": {
+        "de": "Slide-Link",
+        "en": "Slide link",
+        "es": "Enlace de la diapositiva",
+        "fr": "Lien de la diapositive",
+        "it": "Link slide",
+        "ja": "スライドリンク",
+        "pt-BR": "Link do slide"
+      },
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:image"
+    },
+    {
+      "type": "select",
+      "id": "block_video_url_type",
+      "label": "Video link Type",
+      "default": "youtube",
+      "options": [
+        {
+          "value": "youtube",
+          "label": "Youtube"
+        },
+        {
+          "value": "vimeo",
+          "label": "Vimeo"
+        }
+      ],
+      "repeatable": "block",
+      "conditional": "block_type:video"
+    },
+    {
+      "type": "text",
+      "id": "block_video_url_id",
+      "label": "YouTube or Vimeo ID",
+      "default": "_9VUPq3SxOc",
+      "repeatable": "block",
+      "conditional": "block_type:video"
+    },
+    {
+      "type": "select",
+      "id": "block_video_type",
+      "label": {
+        "de": "Stil",
+        "en": "Style",
+        "es": "Estilo",
+        "fr": "Style",
+        "it": "Stile",
+        "ja": "スタイル",
+        "pt-BR": "Estilo"
+      },
+      "options": [
+        {
+          "value": "chrome",
+          "label": {
+            "de": "Foto mit Play Button",
+            "en": "Image with play button",
+            "es": "Imagen con el botón de reproducir",
+            "fr": "Image avec bouton de lecture",
+            "it": "Immagine con pulsante play",
+            "ja": "再生ボタン付き画像",
+            "pt-BR": "Imagem com botão de reprodução"
+          }
+        },
+        {
+          "value": "background-chrome",
+          "label": {
+            "de": "Hintergrund-Video mit Play Button",
+            "en": "Background video with play button",
+            "es": "Video de fondo con el botón de reproducir",
+            "fr": "Vidéo d'arrière-plan avec bouton de lecture",
+            "it": "Video in background con pulsante play",
+            "ja": "再生ボタン付き背景ビデオ",
+            "pt-BR": "Vídeo de fundo com botão de reprodução"
+          }
+        },
+        {
+          "value": "background",
+          "label": {
+            "de": "Hintergrund-Video",
+            "en": "Background video",
+            "es": "Video de fondo",
+            "fr": "Vidéo d'arrière-plan",
+            "it": "Video in background",
+            "ja": "背景ビデオ",
+            "pt-BR": "Vídeo de fundo"
+          }
+        }
+      ],
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:video"
+    }
+  ],
+  "warnings": [
+    "repeating image fields may not be properly handled",
+    "some fields may be named the same"
+  ]
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{% include 'atb-render' field:'section_id' %}
+{% assign section_id = val %}
+{% include 'atb-render' field:'atb_autoplay' %}
+{% assign atb_autoplay = val %}
+{% include 'atb-render' field:'atb_autoplay_speed' %}
+{% assign atb_autoplay_speed = val %}
+{% include 'atb-render' field:'atb_slideshow_height' %}
+{% assign atb_slideshow_height = val %}
+{% include 'atb-render' field:'atb_text_size' %}
+{% assign atb_text_size = val %}
+{% include 'atb-render' field:'block_type' %}
+{% assign block_type = val %}
+{% include 'atb-render' field:'block_image' %}
+{% assign block_image = val %}
+{% include 'atb-render' field:'block_alignment' %}
+{% assign block_alignment = val %}
+{% include 'atb-render' field:'block_title' %}
+{% assign block_title = val %}
+{% include 'atb-render' field:'block_subheading' %}
+{% assign block_subheading = val %}
+{% include 'atb-render' field:'block_link' %}
+{% assign block_link = val %}
+{% include 'atb-render' field:'block_video_type' %}
+{% assign block_video_type = val %}
+{% if atb_autoplay == blank %}
+{% assign atb_autoplay = false %}
+{% else %}
+{% assign atb_autoplay = true %}
+{% endif %}
+{% include 'atb-render' field:'block_video_url_id' %}
+{% assign block_video_url_id = val %}
+{% include 'atb-render' field:'block_video_url_type' %}
+{% assign block_video_url_type = val %}
+{% assign atb_autoplay_speed = atb_autoplay_speed | plus: 0 %}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section index-section index-section--flush">
+<div data-section-id="{{ section_id }}" data-section-type="slideshow-section">
+
+  {% if block_type.size > 0 %}
+    <div class="slideshow-wrapper">
+      <button type="button" class="visually-hidden slideshow__pause" data-id="{{ section_id }}" aria-live="polite">
+        <span class="slideshow__pause-stop">
+          {% include 'icon-pause' %}
+          <span class="icon__fallback-text">{{ 'sections.slideshow.pause_slideshow' | t }}</span>
+        </span>
+        <span class="slideshow__pause-play">
+          {% include 'icon-play' %}
+          <span class="icon__fallback-text">{{ 'sections.slideshow.play_slideshow' | t }}</span>
+        </span>
+      </button>
+
+      <div class="slideshow slideshow--{{ atb_slideshow_height }}" id="Slideshow-{{ section_id }}" data-autoplay="{{ atb_autoplay }}" data-speed="{{ atb_autoplay_speed | times: 1000 }}">
+        {% for block_type0 in block_type %}
+{% assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last %}
+{% assign my_image0 = images[my_image_key0] %}
+          {%- assign is_background_video = false -%}
+          {% if block_type[forloop.index0] == 'video' %}
+            {% if block_video_type[forloop.index0] == 'background' or block_video_type[forloop.index0] =='background-chrome' %}
+              {%- assign is_background_video = true -%}
+            {% endif %}
+          {% endif %}
+
+          <div class="slideshow__slide slideshow__slide--{{ block.id }}{% if is_background_video %} slideshow__slide--background-video{% endif %}" {{ block.shopify_attributes }}>
+            {% if block_link[forloop.index0] != blank %}
+              <a href="{{ block_link[forloop.index0] }}" class="slideshow__link">
+            {% endif %}
+
+            {% if block_type[forloop.index0] == 'video' %}
+              {% if block_video_url_id[forloop.index0] != blank %}
+                <div class="video-loader"></div>
+              {% endif %}
+              {% unless block_video_type[forloop.index0] == 'background' %}
+                <button type="button" class="text-link slideshow__video-control slideshow__video-control--close" data-controls="SlideshowVideo-{{ block.id }}">
+                  {% include 'icon-close' %}
+                  <span class="icon__fallback-text">{{ 'sections.slideshow.close_video' | t }}</span>
+                </button>
+              {% endunless %}
+              {% if block_video_url_id[forloop.index0] != blank %}
+                <div id="SlideshowVideo-{{ block.id }}" class="slideshow__video {% if is_background_video %}slideshow__video--background{% endif %} slideshow__video--{{ block_video_type[forloop.index0] }}"
+                  data-id="{{ block_video_url_id[forloop.index0] }}"
+                  data-type="{{ block_video_type[forloop.index0] }}"
+                  data-slideshow="Slideshow-{{ section_id }}"></div>
+              {% endif %}
+            {% endif %}
+
+            {% if my_image0 == blank %}
+              <div class="slideshow__image js">
+                <div class="placeholder-background">
+                  {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+                  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+            {% else %}
+              <div class="slideshow__image box ratio-container lazyload{% unless forloop.first == true %} lazypreload{% endunless %} js"
+                   data-bgset="{% include 'bgset', image: my_image0 %}"
+                   data-sizes="auto"
+                   data-parent-fit="cover"
+                   style="background-position: {{ block_alignment[forloop.index0] }};{% if forloop.first == true %} background-image: url('{{ my_image0 | img_url: '300x300' }});{% endif %}">
+              </div>
+            {% endif %}
+
+            <noscript>
+              <div class="slideshow__image"{% if my_image0 %} style="background-image: url('{{ block_image[forloop.index0] | img_url: '2048x' }}'); background-position: {{ block_alignment[forloop.index0] }};"{% endif %}>
+                {% if my_image0 == blank %}
+                  <div class="placeholder-background">
+                    {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+                    {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              </div>
+            </noscript>
+            <div class="slideshow__text-wrap{% if block_title[forloop.index0] != blank or block_subheading[forloop.index0] != blank %} slideshow__overlay{% endif %}">
+              <div class="slideshow__text-content">
+                <div class="page-width">
+                  {% unless block_title[forloop.index0] == blank %}
+                    <h2 class="h1 mega-title slideshow__title{% if settings.link != blank %} slideshow__title--has-link{% endif %}{% if atb_text_size == 'large' %} mega-title--large{% endif %}">
+                      {{ block_title[forloop.index0] | escape }}
+                    </h2>
+                  {% endunless %}
+                  {% unless block_subheading[forloop.index0] == blank %}
+                    <span class="mega-subtitle slideshow__subtitle{% if atb_text_size == 'large' %} mega-subtitle--large{% endif %}">
+                      {{ block_subheading[forloop.index0] | escape }}
+                    </span>
+                  {% endunless %}
+                  {% if block_type[forloop.index0] == 'video' %}
+                    {% unless block_video_type[forloop.index0] == 'background' %}
+                      <div class="slideshow__video-control--play-wrapper{% if block_title[forloop.index0] != blank or block_subheading[forloop.index0] != blank %} slideshow__video-control--play-wrapper--push{% endif %}">
+                        <button type="button" class="text-link slideshow__video-control slideshow__video-control--play" data-controls="SlideshowVideo-{{ block.id }}">
+                          {% include 'icon-play-video' %}
+                          <span class="icon__fallback-text">{{ 'sections.slideshow.play_video' | t }}</span>
+                        </button>
+                      </div>
+                    {% endunless %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% if block_link[forloop.index0] != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if block_type.size == 0 %}
+    <div class="placeholder-noblocks">
+      {{ 'homepage.onboarding.no_content' | t }}
+    </div>
+  {% endif %}
+</div>
+
+
+
+
+</section>

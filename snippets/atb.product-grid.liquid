@@ -1,0 +1,83 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": "Product Grid",
+  "max_blocks": 20,
+  "id": "product-grid",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "class": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "image_picker",
+      "id": "atb_collection_image",
+      "label": "Collection Image",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "atb_headline_text",
+      "label": "Collection Title",
+      "info": ""
+    },
+    {
+      "type": "html",
+      "id": "atb_description_text",
+      "label": "Collection Description",
+      "info": ""
+    },
+    {
+      "type": "product",
+      "id": "block_product",
+      "label": "Select Product",
+      "repeatable": "New-Product",
+      "info": ""
+    }
+  ],
+  "warnings": []
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{% include 'atb-render' field:'section_id' %}
+{% assign section_id = val %}
+{% include 'atb-render' field:'atb_collection_image' %}
+{% assign atb_collection_image = val %}
+{% include 'atb-render' field:'atb_headline_text' %}
+{% assign atb_headline_text = val %}
+{% include 'atb-render' field:'atb_description_text' %}
+{% assign atb_description_text = val %}
+{% include 'atb-render' field:'block_product' %}
+{% assign block_product = val %}
+{% assign atb_collection_image_key = atb_collection_image| split: '/files/' | last %}
+{% assign atb_collection_image = images[atb_collection_image_key] %}
+<section id="shopify-section-{{section_id}}" class="shopify-section ">
+<div class="container-fluid">
+  <div class="row">
+    {% assign collectionImage = atb_collection_image %}
+    {% if atb_collection_image_key %}
+      {% include 'logo-container', image: collectionImage, width: '100%', alt: 'Collection Logo' %}
+    {% endif %}
+    {% include 'headline-title', content: atb_headline_text, customClass: "" %}
+    {% include 'description-input', content: atb_description_text, customClass: "" %}
+    <div class="col-12 col-md-12 product-list">
+      <div class="row">
+        {% for block_product0 in block_product %}
+          {%- assign product = all_products[block_product[forloop.index0]] -%}
+          {% include 'collection-product', product: product %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</section>

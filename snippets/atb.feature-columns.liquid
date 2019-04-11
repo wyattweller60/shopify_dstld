@@ -1,0 +1,314 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": {
+    "de": "Textspalten mit Fotos",
+    "en": "Text columns with images",
+    "es": "Col. de texto e imágenes",
+    "fr": "Colonnes avec images",
+    "it": "Colonne di testo con foto",
+    "ja": "画像付きテキスト列",
+    "pt-BR": "Texto com imagens"
+  },
+  "class": "index-section",
+  "id": "feature-columns",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "atb_title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      },
+      "default": {
+        "de": "Textspalten mit Fotos",
+        "en": "Text columns with images",
+        "es": "Col. de texto con imagen",
+        "fr": "Colonnes de texte avec images",
+        "it": "Colonne di testo con foto",
+        "ja": "画像付きテキスト列",
+        "pt-BR": "Colunas de texto com imagens"
+      },
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_align_text",
+      "label": {
+        "de": "Textausrichtung",
+        "en": "Text alignment",
+        "es": "Alineación de texto",
+        "fr": "Alignement du texte",
+        "it": "Allineamento del testo",
+        "ja": "テキストアラインメント",
+        "pt-BR": "Alinhamento de texto"
+      },
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": {
+            "de": "Links",
+            "en": "Left",
+            "es": "Izquierda",
+            "fr": "Gauche",
+            "it": "Sinistra",
+            "ja": "左",
+            "pt-BR": "Esquerda"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "de": "Mittig",
+            "en": "Centered",
+            "es": "Centrado",
+            "fr": "Centré",
+            "it": "Centrato",
+            "ja": "中央揃え",
+            "pt-BR": "Centralizado"
+          }
+        }
+      ],
+      "info": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "block_enable_image",
+      "label": {
+        "de": "Foto anzeigen",
+        "en": "Show image",
+        "es": "Mostrar imagen",
+        "fr": "Afficher l'image",
+        "it": "Mostra immagine",
+        "ja": "画像を表示する",
+        "pt-BR": "Exibir imagem"
+      },
+      "default": true,
+      "repeatable": "Column",
+      "info": ""
+    },
+    {
+      "type": "image_picker",
+      "id": "block_image",
+      "label": {
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "pt-BR": "Imagem"
+      },
+      "repeatable": "Column",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      },
+      "default": {
+        "de": "Titel oder Text hinzufügen",
+        "en": "Add a title or tagline",
+        "es": "Agregar un título o eslogan",
+        "fr": "Ajouter un titre ou un slogan",
+        "it": "Aggiungi un titolo o una tagline",
+        "ja": "タイトルまたはタグラインを追加する",
+        "pt-BR": "Adicione um título ou slogan"
+      },
+      "repeatable": "Column",
+      "info": ""
+    },
+    {
+      "type": "html",
+      "id": "block_text",
+      "label": {
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fr": "Texte",
+        "it": "Testo",
+        "ja": "テキスト",
+        "pt-BR": "Texto"
+      },
+      "default": {
+        "de": "<p>Blogposts, Produkte oder Promotions mit Ihren Kunden teilen. Nutzen Sie diesen Text, um Produkte zu beschreiben, Details zu Verfügbarkeit und Stil mitzuteilen oder als Ort, wo Reviews oder FAQs stehen.</p>",
+        "en": "<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>",
+        "es": "<p>Comparte entradas de blogs, productos o promociones con tus clientes. Usa este texto para describir productos, compartir detalles sobre la disponibilidad y el estilo, o como un espacio para mostrar reseñas recientes o preguntas frecuentes.</p>",
+        "fr": "<p>Partagez des articles de blog, des produits ou des promotions avec vos clients. Utilisez ce texte pour décrire vos produits, partager des détails sur leur disponibilité ou leur style, ou encore pour afficher des FAQ et avis récents.</p>",
+        "it": "<p>Condividi articoli del blog, prodotti o promozioni con i tuoi clienti. Utilizza questo spazio per descrivere i prodotti, condividendo dettagli sulla loro disponibilità e sul loro stile, oppure per mostrare recensioni recenti o domande frequenti.</p>",
+        "ja": "<p>ブログ記事、商品、またはプロモーションをお客様に伝えます。このテキストで商品について説明し、公開状況やスタイルの詳細を共有するか、最近のレビューやFAQを表示するスペースとして使用します。</p>",
+        "pt-BR": "<p>Compartilhe posts de blogs, produtos ou promoções com seus clientes. Use este texto para descrever produtos, compartilhar detalhes sobre disponibilidade e estilo ou como um espaço para exibir comentários recentes ou perguntas frequentes.</p>"
+      },
+      "repeatable": "Column",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_button_label",
+      "label": {
+        "de": "Button-Name",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fr": "Texte du bouton",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンラベル",
+        "pt-BR": "Etiqueta do botão"
+      },
+      "repeatable": "Column",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_button_link",
+      "label": {
+        "de": "Button-Link",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fr": "Lien du bouton",
+        "it": "Link pulsante",
+        "ja": "ボタンリンク",
+        "pt-BR": "Link do botão"
+      },
+      "repeatable": "Column",
+      "info": ""
+    }
+  ],
+  "warnings": [
+  ]
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{% include 'atb-render' field:'section_id' %}
+{% assign section_id = val %}
+{% include 'atb-render' field:'atb_title' %}
+{% assign atb_title = val %}
+{% include 'atb-render' field:'atb_align_text' %}
+{% assign atb_align_text = val %}
+{% include 'atb-render' field:'block_enable_image' %}
+{% assign block_enable_image = val %}
+{% include 'atb-render' field:'block_image' %}
+{% assign block_image = val %}
+{% include 'atb-render' field:'block_title' %}
+{% assign block_title = val %}
+{% include 'atb-render' field:'block_text' %}
+{% assign block_text = val %}
+{% include 'atb-render' field:'block_button_label' %}
+{% assign block_button_label = val %}
+{% include 'atb-render' field:'block_button_link' %}
+{% assign block_button_link = val %}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section index-section">
+<div class="page-width">
+  {% if atb_title != blank %}
+    <div class="section-header text-center">
+      <h2>{{ atb_title | escape }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="grid {% unless block_enable_image.size == 5 %}grid--uniform{% endunless %} grid--flush-bottom">
+    {%- assign grid_item_width = 'medium-up--one-third' -%}
+    {%- assign max_height = 345 -%}
+    {% case block_enable_image.size %}
+      {% when 1 %}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+        {%- assign max_height = 530 -%}
+      {% when 2 %}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+        {%- assign max_height = 530 -%}
+      {% when 4 %}
+        {%- assign grid_item_width = 'medium-up--one-half' -%}
+        {%- assign max_height = 530 -%}
+    {% endcase %}
+    {% for block_enable_image0 in block_enable_image %}
+{% if block_enable_image[forloop.index0] == blank %}
+{% assign my_checkbox0 = false %}
+{% else %}
+{% assign my_checkbox0 = true %}
+{% endif %}
+{% assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last %}
+{% assign my_image0 = images[my_image_key0] %}
+      {% if block_enable_image.size == 5 and forloop.index < 3 %}
+        {%- assign column_width = 'medium-up--one-half' -%}
+        {%- assign max_height = 530 -%}
+      {% else %}
+        {%- assign column_width = grid_item_width -%}
+      {% endif %}
+      <div class="grid__item {{ column_width }} text-{{ atb_align_text }}" {{ block.shopify_attributes }}>
+        {% if my_checkbox0 %}
+          {% if my_image0 != blank %}
+            {% capture img_id %}TextColumnImage-{{ block.id }}{% endcapture %}
+            {% capture wrapper_id %}TextColumnImageWrapper-{{ block.id }}{% endcapture %}
+            {%- assign img_url = my_image0 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            {% include 'atb-image-style' with image: my_image0, width: max_height, height: max_height, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+            <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+              <div style="padding-top:{{ 1 | divided_by: my_image0.aspect_ratio | times: 100}}%;">
+                <img id="{{ img_id }}"
+                     class="feature-row__image lazyload"
+                     src="{{ my_image0 | img_url: '300x300' }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ my_image0.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ my_image0.alt | escape }}">
+              </div>
+            </div>
+            <noscript>
+              <p>
+                {{ my_image0 | img_url: '480x480', scale: 2 | img_tag: block_image[forloop.index0].alt, 'feature-row__image' }}
+              </p>
+            </noscript>
+          {% else %}
+            <p>
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </p>
+          {% endif %}
+        {% endif %}
+        {% if block_title[forloop.index0] != blank %}
+          <h3 class="h4">{{ block_title[forloop.index0] | escape }}</h3>
+        {% endif %}
+        {% if block_text[forloop.index0] != blank %}
+          <div class="rte-setting">{{ block_text[forloop.index0] }}</div>
+        {% endif %}
+        {% if block_button_label[forloop.index0] != blank and block_button_link[forloop.index0] != blank %}
+          <a href="{{ block_button_link[forloop.index0] }}" class="btn btn--secondary btn--small">
+            {{ block_button_label[forloop.index0] | escape }}
+          </a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if block_enable_image.size == 0 %}
+    {% include 'no-blocks' %}
+  {% endif %}
+</div>
+
+
+
+
+</section>
