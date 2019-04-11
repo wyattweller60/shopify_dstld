@@ -1,13 +1,11 @@
 {% comment %}
   The contents of the blog.liquid template can be found in /sections/blog-template.liquid
 {% endcomment %}
-<div class="page-width">
-  <div class="container-fluid">
-    <div class="row blogs-page-header">
-      {% section 'blog-header-template' %}
-    </div>
-    <div class="row blogs-page-main">
-      {% section 'blog-template' %}
-    </div>
+<div class="container-fluid">
+  <div class="row blogs-page-header">
+    {% section 'blog-header-template' %}
+  </div>
+  <div class="row blogs-page-main">
+    {% section 'blog-template' %}
   </div>
 </div>

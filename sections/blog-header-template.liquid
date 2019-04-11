@@ -1,23 +1,16 @@
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row header-info position-relative d-flex align-items-center justify-content-center">
     {% assign headerImage = section.settings.header_image %}
     {% if headerImage %}
       {% include 'logo-container', image: headerImage, width: '100%', alt: 'Collection Logo' %}
     {% endif %}
-    {% include 'headline-title', content: section.settings.headline_text, customClass: "" %}
-    {% include 'description-input', content: section.settings.description_text, customClass: "" %}
-    <ul class="grid grid--uniform top-posts grid--blog">
-      {% for block in section.blocks %}
-        {%- assign article = articles[block.settings.blog_post] -%}
-        <li class="grid__item medium-up--one-third">
-          {% include 'blog-article', article: article %}
-        </li>
-      {% endfor %}
-    </ul>
+    <div class="position-absolute text-center col-12">
+      {% include 'headline-title', content: section.settings.headline_text, customClass: "" %}
+      {% include 'description-input', content: section.settings.description_text, customClass: "" %}
+    </div>
   </div>
 </div>
-
 
 {% schema %}
 {
@@ -41,19 +34,6 @@
       "type": "richtext",
       "id": "description_text",
       "label": "Page Description"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "top_posts",
-      "name": "Top Posts",
-      "settings": [
-        {
-          "type": "article",
-          "id": "blog_post",
-          "label": "Article"
-        }
-      ]
     }
   ]
 }

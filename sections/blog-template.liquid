@@ -1,17 +1,23 @@
 {% paginate blog.articles by section.settings.posts_per_page %}
-
-<div class="page-width">
-  <div class="text-center">
-    <h4>{{ section.settings.blog_post_title }}</h4>
-  </div>
-  <ul class="grid grid--uniform grid--blog">
-    {% for article in blog.articles %}
-      <li class="grid__item medium-up--one-third">
-        {% include 'blog-article', article: article %}
-      </li>
+{% if paginate.current_page == 1 %}
+  <div class="row top-posts">
+    {% for block in section.blocks %}
+      {%- assign article = articles[block.settings.blog_post] -%}
+      {% include 'blog-article', article: article %}
     {% endfor %}
-  </ul>
+  </div>
+{% endif %}
+
+<div class="text-center text-uppercase mb-3 mt-5 posts-section-title">
+  <h3>{{ section.settings.blog_post_title }}</h3>
 </div>
+<ul class="posts-grid">
+  {% for article in blog.articles %}
+    <li class="posts-grid__item">
+      {% include 'blog-article', article: article %}
+    </li>
+  {% endfor %}
+</ul>
 
 {% if paginate.pages > 1 %}
   {% include 'pagination' %}
@@ -24,6 +30,19 @@
 {% schema %}
 {
   "name": "Blog Page Posts",
+  "blocks": [
+    {
+      "type": "top_posts",
+      "name": "Top Posts",
+      "settings": [
+        {
+          "type": "article",
+          "id": "blog_post",
+          "label": "Article"
+        }
+      ]
+    }
+  ],
   "settings": [
     {
       "type": "header",

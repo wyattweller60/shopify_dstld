@@ -50,6 +50,9 @@ h4 {
   color: #0A0A0A;
   font-weight: 700;
 }
+.shopify-section {
+  width: 100%;
+}
 p {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -772,6 +775,117 @@ footer {
     } 
     .product-list {
       margin-top: 10px;
+    }
+  }
+}
+
+// Blogs Page 
+.blogs-page-header {
+  .header-info {
+    max-height: 320px;
+    overflow: hidden;
+  
+    h1 {
+      font-size: 36px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 0;
+      color: #fff;
+    }
+    p {
+      color: #fff;
+    }
+  }
+}
+
+.blogs-page-main {
+  .top-posts {
+    margin: 50px 0 10px;
+    .blog-feature {
+      padding: 10px 0;
+
+      .blog-feature__content {
+        flex: 5;
+        padding: 0;
+        .content {
+          padding: 8vw;
+  
+          .blog-feature__title {
+            font-size: 35px;
+            line-height: 1.2;
+            -webkit-font-smoothing: antialiased;
+            color: #0A0A0A;
+            margin: 1em 0;
+          }
+          .blog-feature__date {
+            font-style: italic;
+          }
+          .blog-feature__lead {
+            font-size: 14px;
+            margin: 1em 0;
+            line-height: 1.5;
+            p {
+              line-height: 1.2;
+              margin-bottom: 5px;
+            }
+          }
+          .read-more {
+            text-decoration: none;
+            font-weight: 700;
+            img {
+              width: 12px;
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+  
+      .blog-feature__image {
+        flex: 7;
+        padding: 0 10px;
+      }
+    }
+
+    & > div:nth-of-type(2n + 1) {
+      .blog-feature {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  .posts-section-title h3 {
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+  .posts-grid {
+    list-style-type: none;
+    list-style: none;
+    column-count: 2;
+    column-gap: 1em;
+    padding: 0 20px;
+
+    .posts-grid__item {
+      padding: 10px;
+
+      .blog-feature__title {
+        font-size: 24px;
+      }
+      .blog-feature__lead {
+        margin: 1em 0;
+        line-height: 1.5;
+        p {
+          line-height: 1.2;
+          margin-bottom: 5px;
+        }
+      }
+      .read-more {
+        text-decoration: none;
+        font-weight: 700;
+        img {
+          width: 12px;
+          margin-left: 3px;
+        }
+      }
     }
   }
 }
