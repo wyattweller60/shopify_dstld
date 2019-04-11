@@ -1,0 +1,60 @@
+
+<div class="container-fluid">
+  <div class="row">
+    {% assign headerImage = section.settings.header_image %}
+    {% if headerImage %}
+      {% include 'logo-container', image: headerImage, width: '100%', alt: 'Collection Logo' %}
+    {% endif %}
+    {% include 'headline-title', content: section.settings.headline_text, customClass: "" %}
+    {% include 'description-input', content: section.settings.description_text, customClass: "" %}
+    <ul class="grid grid--uniform top-posts grid--blog">
+      {% for block in section.blocks %}
+        {%- assign article = articles[block.settings.blog_post] -%}
+        <li class="grid__item medium-up--one-third">
+          {% include 'blog-article', article: article %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Blog Page Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Blog Page Header"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Header Image"
+    },
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Page Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description_text",
+      "label": "Page Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "top_posts",
+      "name": "Top Posts",
+      "settings": [
+        {
+          "type": "article",
+          "id": "blog_post",
+          "label": "Article"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
