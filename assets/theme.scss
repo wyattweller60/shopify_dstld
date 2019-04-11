@@ -1380,7 +1380,6 @@ h4,
 h5,
 h6 {
   margin: 0 0 ($section-spacing-small / 2);
-  font-family: $font-stack-header;
   font-style: $font-style-header;
   font-weight: $font-weight-header;
   line-height: 1.2;
@@ -1801,7 +1800,6 @@ a[href^="tel"] {
   padding: $input-padding-top-bottom-small $input-padding-left-right-small;
   background-color: $color-btn-primary;
   color: $color-btn-primary-text;
-  font-family: $font-stack-header;
   font-style: $font-style-header;
   font-weight: $font-weight-header;
   text-transform: uppercase;

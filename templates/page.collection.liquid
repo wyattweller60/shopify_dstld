@@ -1,3 +1,10 @@
-{% include 'atb' zone:"Top"%}<div class="page-width">
+<div class="page-width">
+  <div class="container-fluid collection-page">
+    <div class="row">
+      {% section 'page-header' %}
+    </div>
+    <div class="row sub-collections">
+      {% include 'atb' zone:"Bottom" %}
+    </div>
+  </div>
 </div>
-{% include 'atb' zone:"Bottom"%}

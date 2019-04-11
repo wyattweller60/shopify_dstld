@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    {% assign headerImage = section.settings.header_image %}
+    {% if headerImage %}
+      {% include 'logo-container', image: headerImage, width: '100%', alt: 'Collection Logo' %}
+    {% endif %}
+    {% include 'headline-title', content: section.settings.headline_text, customClass: "" %}
+    {% include 'description-input', content: section.settings.description_text, customClass: "" %}
+    <div class="col-12 col-md-12 product-list">
+      <div class="row">
+        {% for block in section.blocks %}
+          {%- assign product = all_products[block.settings.product] -%}
+          {% include 'collection-product', product: product %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Header Image"
+    },
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Page Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description_text",
+      "label": "Page Description"
+    }
+  ]
+}
+{% endschema %}
