@@ -218,6 +218,47 @@
           "headline_text": "",
           "description_text": ""
         }
+      },
+      "page-header": {
+        "type": "page-header",
+        "settings": {
+          "header_image": "shopify:\/\/shop_images\/https___d4zpg1jklewne.cloudfront.net_steak_collections_skinny-jeans_indigo-denim-1525127373920_banner_1.jpg",
+          "headline_text": "Skinny Jeans",
+          "description_text": "<p>Introducing the best fitting jeans made from innovative, superior denim and a proprietary construction designed to flatter, lift, and shape. Find your flawless fit in a variety of current styles, like high waisted skinny jeans, boyfriend jeans, cropped jeans, petite jeans, black jeans, and ripped jeans.<\/p>"
+        }
+      },
+      "blog-header-template": {
+        "type": "blog-header-template",
+        "settings": {
+          "header_image": "shopify:\/\/shop_images\/blog-hero-womens.jpg",
+          "headline_text": "Blog",
+          "description_text": "<p>The latest news &amp; updates of all things DSTLD<\/p>"
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "blocks": {
+          "1555014040088": {
+            "type": "top_posts",
+            "settings": {
+              "blog_post": "news\/a-day-in-downtown-los-angeles-with-catchmeeksifyoucan-and-brockdehaven"
+            }
+          },
+          "1555014098336": {
+            "type": "top_posts",
+            "settings": {
+              "blog_post": "news\/the-dstld-guide-to-styling-different-blue-jean-washes"
+            }
+          }
+        },
+        "block_order": [
+          "1555014040088",
+          "1555014098336"
+        ],
+        "settings": {
+          "blog_post_title": "Latest Posts",
+          "posts_per_page": "4"
+        }
       }
     },
     "content_for_index": [

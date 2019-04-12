@@ -10,6 +10,12 @@
       {% include 'description-input', content: section.settings.description_text, customClass: "" %}
     </div>
   </div>
+  <div class="row top-posts">
+    {% for block in section.blocks %}
+      {%- assign article = articles[block.settings.blog_post] -%}
+      {% include 'blog-article', article: article %}
+    {% endfor %}
+  </div>
 </div>
 
 {% schema %}
@@ -34,6 +40,19 @@
       "type": "richtext",
       "id": "description_text",
       "label": "Page Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "top_posts",
+      "name": "Top Posts",
+      "settings": [
+        {
+          "type": "article",
+          "id": "blog_post",
+          "label": "Article"
+        }
+      ]
     }
   ]
 }

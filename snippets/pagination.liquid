@@ -1,35 +1,61 @@
 <ul class="list--inline pagination">
-  {% unless paginate.previous.is_link %}
-    <li aria-hidden="true">
-      <button class="btn btn--tertiary btn--narrow" disabled>
-        {% include 'icon-arrow-left' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
-      </button>
-    </li>
-    {% else %}
+  {% if paginate.current_page != 1 %}
+    <li>
+      <a href="{{ paginate.parts[0].url }}" class="btn btn--tertiary btn--narrow">
+        <<
+      </a>
+    </li> 
+  {% endif %} 
+  {% if paginate.previous.is_link %}
     <li>
       <a href="{{ paginate.previous.url }}" class="btn btn--tertiary btn--narrow">
-        {% include 'icon-arrow-left' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+        <
       </a>
     </li>
-  {% endunless %}
-  <li class="pagination__text">
-    {{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}
-  </li>
-  {% unless paginate.next.is_link %}
-    <li aria-hidden="true">
-      <button class="btn btn--tertiary btn--narrow" disabled>
-        {% include 'icon-arrow-right' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
-      </button>
-    </li>
+  {% endif %}
+  
+  {% assign distance = paginate.pages | minus: paginate.current_page %}
+  {% if distance < 3 %}
+    {% assign startIndex = paginate.pages | minus: 6 | at_least: 1 %}
+  {% endif %}
+  {% if paginate.current_page < 5 %}
+    {% assign startIndex = 1 %}
   {% else %}
+    {% assign startIndex = paginate.current_page | minus: 3 | at_least: 1 %}
+  {% endif %}
+  
+  {% assign endIndex = startIndex | plus: 6 %}
+  {% for pageIndex in (startIndex .. endIndex) %} 
+    {% assign pageIndexNumber = pageIndex | minus: 1 %}
+    {% if pageIndex <= paginate.pages %}
+      {% if pageIndex == paginate.current_page %}
+        <li>
+          <a href="{{ paginate.parts[pageIndexNumber].url }}" class="btn btn--tertiary btn--narrow active">
+            {{ pageIndex }}
+          </a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{{ paginate.parts[pageIndexNumber].url }}" class="btn btn--tertiary btn--narrow">
+            {{ pageIndex }}
+          </a>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if paginate.next.is_link %}
     <li>
       <a href="{{ paginate.next.url }}" class="btn btn--tertiary btn--narrow">
-        {% include 'icon-arrow-right' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+        >
       </a>
     </li>
-  {% endunless %}
+  {% endif %}
+  {% if paginate.current_page != paginate.pages %}
+  {% assign pageIndex = paginate.pages | minus: 1 %}
+    <li>
+      <a href="{{ paginate.parts[pageIndex].url }}" class="btn btn--tertiary btn--narrow">
+        >>
+      </a>
+    </li>
+  {% endif %}
 </ul>
