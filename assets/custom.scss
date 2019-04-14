@@ -865,7 +865,7 @@ footer {
           padding: 0;
 
           .content {
-            padding: 8vw;
+            padding: 7vw 4vw;
 
             .blog-feature__title {
               font-size: 35px;
@@ -908,15 +908,18 @@ footer {
   .posts-grid {
     list-style-type: none;
     list-style: none;
-    column-count: 1;
-    column-gap: 1em;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     padding: 0 20px;
+
     @media (min-width: $screen-sm-min) {
-      column-count: 2;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
     
     .posts-grid__item {
       padding: 30px 0;
+      grid-row-end: span 1;
 
       .blog-feature__title {
         font-size: 18px;

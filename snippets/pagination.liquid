@@ -2,51 +2,42 @@
   {% if paginate.current_page != 1 %}
     <li>
       <a href="{{ paginate.parts[0].url }}" class="btn btn--tertiary btn--narrow">
-        <<
+        &laquo;
       </a>
     </li> 
   {% endif %} 
   {% if paginate.previous.is_link %}
     <li>
       <a href="{{ paginate.previous.url }}" class="btn btn--tertiary btn--narrow">
-        <
+        &lsaquo;
       </a>
     </li>
   {% endif %}
-  
-  {% assign distance = paginate.pages | minus: paginate.current_page %}
-  {% if distance < 3 %}
-    {% assign startIndex = paginate.pages | minus: 6 | at_least: 1 %}
-  {% endif %}
-  {% if paginate.current_page < 5 %}
-    {% assign startIndex = 1 %}
-  {% else %}
-    {% assign startIndex = paginate.current_page | minus: 3 | at_least: 1 %}
-  {% endif %}
-  
-  {% assign endIndex = startIndex | plus: 6 %}
-  {% for pageIndex in (startIndex .. endIndex) %} 
-    {% assign pageIndexNumber = pageIndex | minus: 1 %}
-    {% if pageIndex <= paginate.pages %}
-      {% if pageIndex == paginate.current_page %}
-        <li>
-          <a href="{{ paginate.parts[pageIndexNumber].url }}" class="btn btn--tertiary btn--narrow active">
-            {{ pageIndex }}
-          </a>
+
+  {%- for part in paginate.parts -%}
+    {%- if part.is_link -%}
+      <li>
+        <a href="{{ part.url }}"  class="btn btn--tertiary btn--narrow">
+          {{ part.title }}
+        </a>
+      </li>
+    {%- else -%}
+      {%- if part.title == paginate.current_page -%}
+        <li class="active" aria-current="page">
+          <span class="btn btn--tertiary active btn--narrow">{{ part.title }}</span>
         </li>
-      {% else %}
+      {%- else -%}
         <li>
-          <a href="{{ paginate.parts[pageIndexNumber].url }}" class="btn btn--tertiary btn--narrow">
-            {{ pageIndex }}
-          </a>
+          <span class="visuallyhidden px-1" >&middot;&middot;&middot;</span>
         </li>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
+      {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
+
   {% if paginate.next.is_link %}
     <li>
       <a href="{{ paginate.next.url }}" class="btn btn--tertiary btn--narrow">
-        >
+        &rsaquo;
       </a>
     </li>
   {% endif %}
@@ -54,7 +45,7 @@
   {% assign pageIndex = paginate.pages | minus: 1 %}
     <li>
       <a href="{{ paginate.parts[pageIndex].url }}" class="btn btn--tertiary btn--narrow">
-        >>
+        &raquo;
       </a>
     </li>
   {% endif %}
