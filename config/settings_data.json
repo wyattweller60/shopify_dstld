@@ -257,7 +257,7 @@
         ],
         "settings": {
           "blog_post_title": "Latest Posts",
-          "posts_per_page": "4"
+          "posts_per_page": "2"
         }
       }
     },
