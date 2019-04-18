@@ -71,64 +71,57 @@
           tabindex="-1"
         />
       </div>
-      <div class="col-12 col-md-6 no-padding">
-        <div class="grid__item {{ product_description_width }}">
+      <div class="col-12 col-md-6 no-padding product-details-section">
+        <div class="px-3">
           <div class="product-single__meta">
 
             <h1 class="product-single__title">{{ product.title }}</h1>
 
-              <div class="product__price">
-                {% include 'product-price', variant: current_variant %}
+            <h4 class="product__price">
+              {{ price | money }}
+            </h4>
+
+            <div class="product__compare_at_price">
+              Traditional Retail: {{ compare_at_price | money }}
+            </div>
+
+            {% if section.settings.show_quantity_selector %}
+              <div id="error-quantity-{{ section.id }}" class="form-message form-message--error product__quantity-error hide" tabindex="-1">
+                {% include 'icon-error' %} {{ 'products.product.quantity_minimum_message' | t }}
               </div>
+            {% endif %}
 
-              {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-                <div class="product__policies rte">
-                  {%- if shop.taxes_included -%}
-                    {{ 'products.product.include_taxes' | t }}
-                  {%- endif -%}
-                  {%- if shop.shipping_policy.body != blank -%}
-                    {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
+            {% capture "form_classes" -%}
+              product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}{% if section.settings.enable_payment_button and product.has_only_default_variant%} product-form--payment-button-no-variants{% endif %}
+            {%- endcapture %}
 
-              {% if section.settings.show_quantity_selector %}
-                <div id="error-quantity-{{ section.id }}" class="form-message form-message--error product__quantity-error hide" tabindex="-1">
-                  {% include 'icon-error' %} {{ 'products.product.quantity_minimum_message' | t }}
-                </div>
-              {% endif %}
+            {% form 'product', product, class:form_classes, novalidate: 'novalidate' %}
+              {% unless product.has_only_default_variant %}
+                {% for option in product.options_with_values %}
+                  <div class="selector-wrapper js product-form__item">
+                    <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+                      {{ option.name }}
+                    </label>
+                    <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+                      {% for value in option.values %}
+                        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {% endfor %}
+              {% endunless %}
 
-              {% capture "form_classes" -%}
-                product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}{% if section.settings.enable_payment_button and product.has_only_default_variant%} product-form--payment-button-no-variants{% endif %}
-              {%- endcapture %}
-
-              {% form 'product', product, class:form_classes, novalidate: 'novalidate' %}
-                {% unless product.has_only_default_variant %}
-                  {% for option in product.options_with_values %}
-                    <div class="selector-wrapper js product-form__item">
-                      <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
-                        {{ option.name }}
-                      </label>
-                      <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
-                        {% for value in option.values %}
-                          <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                  {% endfor %}
-                {% endunless %}
-
-                <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
-                  {% for variant in product.variants %}
-                    {% if variant.available %}
-                      <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
-                        {{ variant.title }}
-                      </option>
-                    {% else %}
-                      <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
+              <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
+                {% for variant in product.variants %}
+                  {% if variant.available %}
+                    <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
+                      {{ variant.title }}
+                    </option>
+                  {% else %}
+                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
 
                 {% if section.settings.show_quantity_selector %}
                   <div class="product-form__item product-form__item--quantity">
@@ -278,7 +271,6 @@ $(window).load(function() {
         var img_left_new = img_left + change_x;
 
         /* Validate top and left do not fall outside the image, otherwise white space will be seen */
-        console.log(_CONTAINER_HEIGHT, _CONTAINER_WIDTH, _IMAGE_WIDTH, _IMAGE_HEIGHT);
         MAX_Y_RANGE = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
         if(img_top_new > 0)
           img_top_new = 0;
