@@ -39,6 +39,10 @@
   {% include 'social-meta-tags' %}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'bootstrap.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+  {{ 'flexslider.css' | asset_url | stylesheet_tag }}
+  {{ 'font-awesome.min.css' | asset_url | stylesheet_tag }}
   {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
 
   <script>
@@ -74,6 +78,8 @@
 
   <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'jquery.flexslider.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'jquery.easytabs.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
