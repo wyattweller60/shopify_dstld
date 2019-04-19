@@ -74,7 +74,6 @@
       <div class="col-12 col-md-6 no-padding product-details-section">
         <div class="px-3">
           <div class="product-single__meta">
-
             <h1 class="product-single__title">{{ product.title }}</h1>
 
             <h4 class="product__price">
@@ -85,83 +84,307 @@
               Traditional Retail: {{ compare_at_price | money }}
             </div>
 
-            {% if section.settings.show_quantity_selector %}
-              <div id="error-quantity-{{ section.id }}" class="form-message form-message--error product__quantity-error hide" tabindex="-1">
-                {% include 'icon-error' %} {{ 'products.product.quantity_minimum_message' | t }}
-              </div>
-            {% endif %}
-
-            {% capture "form_classes" -%}
-              product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}{% if section.settings.enable_payment_button and product.has_only_default_variant%} product-form--payment-button-no-variants{% endif %}
-            {%- endcapture %}
-
             {% form 'product', product, class:form_classes, novalidate: 'novalidate' %}
+              
+              <div class="pdp-swatches">
+                {% for link in linklists['main-left-menu-1'].links %}
+                  <div class="pdp-swatches__option">
+                    <a title="Jet Black">
+                      <img
+                        src="https://d4zpg1jklewne.cloudfront.net/steak/products/mens-french-terry-zip-hoodie-in-jet-black/swatch-blk/swatch.jpg?1552348264">
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            
               {% unless product.has_only_default_variant %}
                 {% for option in product.options_with_values %}
-                  <div class="selector-wrapper js product-form__item">
-                    <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
-                      {{ option.name }}
-                    </label>
-                    <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
-                      {% for value in option.values %}
-                        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
-                      {% endfor %}
-                    </select>
+                  <div class="product-options--option">
+                    {% unless option.name == 'Color' %}
+                      <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+                      <ul class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+                        {% for value in option.values %}
+                          <li value="{{ value | escape }}"{% if option.selected_value == value %} class="active" {% endif %}>{{ value }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endunless %}
                   </div>
                 {% endfor %}
               {% endunless %}
 
-              <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
-                {% for variant in product.variants %}
-                  {% if variant.available %}
-                    <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
-                      {{ variant.title }}
-                    </option>
-                  {% else %}
-                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
-
-                {% if section.settings.show_quantity_selector %}
-                  <div class="product-form__item product-form__item--quantity">
-                    <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
-                    <input type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1" class="product-form__input" pattern="[0-9]*">
-                  </div>
-                {% endif %}
-                <div class="product-form__item product-form__item--submit{% if section.settings.enable_payment_button %} product-form__item--payment-button{% endif %}{% if product.has_only_default_variant %} product-form__item--no-variants{% endif %}">
-                  <button type="submit" name="add" id="AddToCart-{{ section.id }}" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}">
-                    <span id="AddToCartText-{{ section.id }}">
-                      {% unless current_variant.available %}
-                        {{ 'products.product.sold_out' | t }}
-                      {% else %}
-                        {{ 'products.product.add_to_cart' | t }}
-                      {% endunless %}
-                    </span>
-                  </button>
-                  {% if section.settings.enable_payment_button %}
-                    {{ form | payment_button }}
+              <!-- Fit Guide Modal -->
+              {% if product.metafields.accentuate.fit_guide_title %}
+                <div class="pdp-fitguide-modelbox">
+                  <a class="size_finder" href="#">{{ product.metafields.accentuate.fit_guide_title }}</a>
+                  {% if product.metafields.accentuate.fit_guide_summary %}
+                    <div class="modelbox">{{ product.metafields.accentuate.fit_guide_summary }}</div>
                   {% endif %}
                 </div>
-              {% endform %}
+                <div class="pdp-fitguide-modal">
+                  <button type="button" class="modal__close js-modal-close text-link">
+                    {% include 'icon-close' %}
+                  </button>
+                  <div class="fit-guide">
+                    <h3 class="pdp-content__name">{{ product.metafields.accentuate.fit_guide_title }}</h3>
+                    <h4>{{ product.title }}</h4>
+                    <ul class="nav nav-tabs">
+                      <li><a data-id="0" href="#" class="active">US</a></li>
+                      <li ><a data-id="1" href="#">International</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      {% if product.tags['men'] %}
+                        {% assign isGenderMen = true %}
+                      {% else %}
+                        {% assign isGenderMen = false %}
+                      {% endif %}
+                      <div class="tab-content__item active">
+                        <img class="size-chart"
+                          src="{{ product.metafields.accentuate.fitguide_image }}">
+                        {% unless isGenderMen %}
+                          <div class="womens-size-conversion">
+                            <table class="international-size-chart">
+                              <tbody>
+                                <tr>
+                                  <td>Pants Size</td>
+                                  <td>00</td>
+                                  <td>0</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>6</td>
+                                  <td>8</td>
+                                  <td>10</td>
+                                  <td>12</td>
+                                </tr>
+                                <tr>
+                                  <td>DSTLD Size</td>
+                                  <td>24 / 0</td>
+                                  <td>25 / 2</td>
+                                  <td>26 / 4</td>
+                                  <td>27 / 6</td>
+                                  <td>28 / 8</td>
+                                  <td>29 / 10</td>
+                                  <td>30/31 12/14</td>
+                                  <td>32 / 16</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        {% endunless %}
+                      </div>
+                      <div class="tab-content__item">
+                        <div class="international-size-chart-wrapper">
+                          {% if isGenderMen %}
+                            <table class="international-size-chart">
+                              <tbody>
+                                <tr>
+                                  <th>mens</th>
+                                  <th>xs</th>
+                                  <th>s</th>
+                                  <th>m</th>
+                                  <th>l</th>
+                                  <th>xl</th>
+                                </tr>
+                                <tr>
+                                  <td>european (EU)</td>
+                                  <td>44</td>
+                                  <td>46</td>
+                                  <td>48</td>
+                                  <td>50</td>
+                                  <td>52</td>
+                                </tr>
+                                <tr>
+                                  <td>french (FR)</td>
+                                  <td>44</td>
+                                  <td>46</td>
+                                  <td>48</td>
+                                  <td>50</td>
+                                  <td>52</td>
+                                </tr>
+                                <tr>
+                                  <td>italian (IT)</td>
+                                  <td>44</td>
+                                  <td>46</td>
+                                  <td>48</td>
+                                  <td>50</td>
+                                  <td>52</td>
+                                </tr>
+                                <tr>
+                                  <td>UK/US chest</td>
+                                  <td>34</td>
+                                  <td>36</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                                </tr>
+                                <tr>
+                                  <td>UK/US waist</td>
+                                  <td>28</td>
+                                  <td>30</td>
+                                  <td>32</td>
+                                  <td>34</td>
+                                  <td>36</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          {% else %}
+                            <table class="international-size-chart international-size-chart__womens">
+                              <tbody>
+                                <tr>
+                                  <th>US</th>
+                                  <th>00</th>
+                                  <th>0</th>
+                                  <th>2-4</th>
+                                  <th>4-6</th>
+                                  <th>8</th>
+                                  <th>10</th>
+                                  <th>12</th>
+                                </tr>
+                                <tr>
+                                  <td>UK</td>
+                                  <td>4</td>
+                                  <td>6</td>
+                                  <td>8</td>
+                                  <td>10</td>
+                                  <td>12</td>
+                                  <td>14</td>
+                                  <td>16</td>
+                                </tr>
+                                <tr>
+                                  <td>Italy</td>
+                                  <td>36</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                                  <td>44</td>
+                                  <td>46</td>
+                                  <td>48</td>
+                                </tr>
+                                <tr>
+                                  <td>France</td>
+                                  <td>32</td>
+                                  <td>34</td>
+                                  <td>36</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                                  <td>44</td>
+                                </tr>
+                                <tr>
+                                  <td>Denmark</td>
+                                  <td>30</td>
+                                  <td>32</td>
+                                  <td>34</td>
+                                  <td>36</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                                </tr>
+                                <tr>
+                                  <td>Germany</td>
+                                  <td>30</td>
+                                  <td>32</td>
+                                  <td>34</td>
+                                  <td>36</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                                </tr>
+                                <tr>
+                                  <td>Australia</td>
+                                  <td>4</td>
+                                  <td>6</td>
+                                  <td>8</td>
+                                  <td>10</td>
+                                  <td>12</td>
+                                  <td>14</td>
+                                  <td>16</td>
+                                </tr>
+                                <tr>
+                                  <td>Japan</td>
+                                  <td>3</td>
+                                  <td>5</td>
+                                  <td>7</td>
+                                  <td>9</td>
+                                  <td>11</td>
+                                  <td>13</td>
+                                  <td>15</td>
+                                </tr>
+                                <tr>
+                                  <td>Jeans</td>
+                                  <td>23</td>
+                                  <td>24-25</td>
+                                  <td>26-27</td>
+                                  <td>27-28</td>
+                                  <td>29-30</td>
+                                  <td>31-32</td>
+                                  <td>32-33</td>
+                                </tr>
+                                <tr>
+                                  <td>Size</td>
+                                  <td>XXS</td>
+                                  <td>XXS-XS</td>
+                                  <td>XS-S</td>
+                                  <td>S-M</td>
+                                  <td>M-L</td>
+                                  <td>L-XL</td>
+                                  <td>XL-XXL</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    <h3 class="pdp-content__name">{{ product.metafields.accentuate.fit_guide_more_section_title }}</h3>
+                    <p class="try-multiple-sizes-description">{{ product.metafields.accentuate.fit_guide_more_section_desc }}</p>
+                  </div>
+                </div>
+              {% endif %}
+
+              <div class="pdp-cta">
+                {% if current_variant.available %}
+                  <div class="add-to-cart">
+                    <div class="btn btn--raised btn-black btn-block btn-add-to-cart">Add To Cart</div>
+                    <div class="btn btn--raised btn-black btn-block btn-add-to-cart btn-adding-to-cart disabled hidden">Adding To Cart...<div class="cart-loading"></div>
+                  </div>
+                {% endif %}
+                {% unless current_variant.available %}
+                  <div class="add-to-cart">
+                    <div class="btn btn-black btn-block btn-add-to-cart">Exceeds&nbsp;Avail&nbsp;Stock</div>
+                  </div>
+                {% endunless %}
+                {% unless current_variant.available %}
+                  <div class="add-to-cart">
+                    <div class="btn btn-black btn-block btn-add-to-cart">Waitlist</div>
+                  </div>
+                {% endunless %}
+              </div>
+              <p>100% Guaranteed Fit. Free US Shipping + Returns.</p>
+            {% endform %}
+            <div class="pdp-fit-links">
+              <a href="#">Can't Find Your Size?</a>
             </div>
-
-            {%- comment -%}
-              Live region for announcing updated price and availability to screen readers
-            {%- endcomment -%}
-            <p class="visually-hidden" data-product-status
-              aria-live="polite"
-              role="status"
-            ></p>
-
-            <div class="product-single__description rte">
-              {{ product.description }}
+            <div id="pdp-tabs" class="tab-container">
+              <ul class='etabs'>
+                {% for fieldName in product.metafields.accentuate.more_section_fields_name %}
+                    <li data-id="{{ forloop.index0 }}" class='tab {% if forloop.first == true %}active{% endif %}'><a href="#" class="tab-item">{{ fieldName }}</a></li>
+                {% endfor %}  
+              </ul>
+              {% for fieldValue in product.metafields.accentuate.more_section_fields_content %}
+                <div class="tab-panel {% if forloop.first == true %}active{% endif %}">
+                   {{ fieldValue }}
+                </div>
+              {% endfor %}  
             </div>
-
-            {% if section.settings.show_share_buttons %}
-              {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
-            {% endif %}
+          </div>
         </div>
+      </div>
+      
+      <div class="col-12 col-md-6 no-padding recent-products">
+        <h3 class="section-header">Recently Viewed</h3>
+
       </div>
     </div>
   </div>
@@ -174,7 +397,7 @@
 {% endunless %}
 
 {% javascript %}
-$(window).load(function() {
+  $(window).load(function() {
     var selectedProductImage = null;
     var _DRAGGGING_STARTED = 0;
     var _LAST_MOUSEMOVE_POSITION = { x: null, y: null };
@@ -285,6 +508,34 @@ $(window).load(function() {
         $(".mobile-zoomviewer-image").css({ top: img_top_new + 'px', left: img_left_new + 'px' });
       }
     });
+
+    // Product Info Tab
+    $('.tab').on('click', function () {
+      var index = $(this).data('id');
+      $('.tab').removeClass('active');
+      $(this).addClass('active');
+      $('.tab-panel').removeClass('active');
+      $('.tab-panel').eq(index).addClass('active');
+    });
+
+    // Fit Guide Modal APIs
+    $('.pdp-fitguide-modelbox a').on('click', function() {
+      $('.pdp-fitguide-modal').addClass('open');
+      $('body').css('overflow', 'hidden');
+    });
+    $('.pdp-fitguide-modal .modal__close').on('click', function() {
+      $('.pdp-fitguide-modal').removeClass('open');
+      $('body').css('overflow', 'auto');
+    });
+
+    $('.pdp-fitguide-modal .nav-tabs a').on('click', function() {
+      var index = $(this).data('id');
+      $('.pdp-fitguide-modal .nav-tabs a').removeClass('active');
+      $(this).addClass('active');
+      $('.tab-content .tab-content__item').removeClass('active');
+      $('.tab-content .tab-content__item').eq(index).addClass('active');
+    });
+
   });
 {% endjavascript %}
 
