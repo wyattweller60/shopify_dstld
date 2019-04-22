@@ -259,6 +259,18 @@
           "blog_post_title": "Latest Posts",
           "posts_per_page": "2"
         }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "image_size": "medium",
+          "show_quantity_selector": true,
+          "show_variant_labels": true,
+          "show_vendor": true,
+          "enable_zoom": true,
+          "enable_payment_button": true,
+          "show_share_buttons": true
+        }
       }
     },
     "content_for_index": [
