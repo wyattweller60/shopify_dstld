@@ -114,25 +114,23 @@
                 {% endfor %}
               {% endunless %}
               <!-- Fit Guide Modal -->
-              {% if product.metafields.accentuate.fit_guide_title %}
-                <div class="pdp-fitguide-modelbox">
-                  <a class="size_finder" href="#">{{ product.metafields.accentuate.fit_guide_title }}</a>
-                  {% if product.metafields.accentuate.fit_guide_summary %}
-                    <div class="modelbox">{{ product.metafields.accentuate.fit_guide_summary }}</div>
-                  {% endif %}
-                </div>
-              {% endif %}
+              <div class="pdp-fitguide-modelbox">
+                <a class="size_finder" href="#">{{ section.settings.fit_guide_title }}</a>
+                {% if product.metafields.accentuate.fit_guide_summary %}
+                  <div class="modelbox">{{ product.metafields.accentuate.fit_guide_summary }}</div>
+                {% endif %}
+              </div>
               <!-- Add to Cart CTA -->
               <div class="pdp-cta">
                 {% if current_variant.available %}
                   <div class="add-to-cart">
-                    <div class="btn btn--raised btn-black btn-block btn-add-to-cart">Add To Cart</div>
+                    <div class="btn btn--raised btn-black btn-block btn-add-to-cart">{{ section.settings.add_to_cart_btn_title }}</div>
                     <div class="btn btn--raised btn-black btn-block btn-add-to-cart btn-adding-to-cart disabled hidden">Adding To Cart...<div class="cart-loading"></div>
                   </div>
                 {% endif %}
                 {% unless current_variant.available %}
                   <div class="add-to-cart">
-                    <div class="btn btn-black btn-block btn-add-to-cart">Exceeds&nbsp;Avail&nbsp;Stock</div>
+                    <div class="btn btn-black btn-block btn-add-to-cart">Exceeds Available Stock</div>
                   </div>
                 {% endunless %}
                 {% unless current_variant.available %}
@@ -150,7 +148,7 @@
                 {% include 'icon-close' %}
               </button>
               <div class="fit-guide">
-                <h3 class="pdp-content__name">{{ product.metafields.accentuate.fit_guide_title }}</h3>
+                <h3 class="pdp-content__name">{{ section.settings.fit_guide_title }}</h3>
                 <h4>{{ product.title }}</h4>
                 <ul class="nav nav-tabs">
                   <li><a data-id="0" href="#" class="active">US</a></li>
@@ -366,7 +364,7 @@
             </div>
             <!-- Size Find Modal -->
             <div class="pdp-sizeguide-modelbox pdp-fit-links">
-              <a href="#">{{ product.metafields.accentuate.size_guide_title }}</a>
+              <a href="#">{{ section.settings.size_guide_title }}</a>
             </div>
             <div class="pdp-modal pdp-sizeguide-modal">
               <button type="button" class="modal__close js-modal-close text-link">
@@ -423,7 +421,7 @@
           </ul>
           {% for fieldValue in product.metafields.accentuate.more_section_fields_content %}
             <div class="tab-panel {% if forloop.first == true %}active{% endif %}">
-                {{ fieldValue }}
+              {{ fieldValue }}
             </div>
           {% endfor %}  
         </div>
@@ -431,20 +429,6 @@
         <div class="col-12 col-md-6 no-padding recent-products text-center">
           <h4 class="section-header text-uppercase">Recently Viewed</h4>
           <div class="recent-products-slick">
-            {% for image in product.images %}
-            {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_2048x.' -%}
-              <div class="feature-row" data-thumb="{{ img_url }}">
-                <img id="{{ img_id }}"
-                  class="feature-row__image"
-                  src="{{ image | img_url: '1024x' }}"
-                  data-src="{{ img_url }}"
-                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                  data-aspectratio="{{ image.aspect_ratio }}"
-                  data-sizes="auto"
-                  tabindex="-1"
-                  alt="{{ image.alt | escape }}" />
-              </div>
-            {% endfor %}
           </div>
         </div>
       </div>
@@ -453,13 +437,25 @@
 </div>
 
 {% unless product == empty %}
-  <script type="application/json" id="ProductJson-{{ section.id }}">
+  <script type="application/json" id="productJson">
     {{ product | json }}
   </script>
 {% endunless %}
 
 {% javascript %}
   $(window).load(function() {
+    var productJson = JSON.parse(document.getElementById('productJson').innerHTML);
+    var recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
+    if (recentlyProducts == null) recentlyProducts = [];
+      else recentlyProducts = recentlyProducts.map(item => item.id != productJson.id);
+    recentlyProducts.push({
+      id: productJson.id,
+      images: productJson.images,
+      url: productJson.url,
+    });
+    if (recentlyProducts.length > 6) recentlyProducts.shift();
+    window.localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyProducts));
+
     var selectedProductImage = null;
     var _DRAGGGING_STARTED = 0;
     var _LAST_MOUSEMOVE_POSITION = { x: null, y: null };
@@ -476,6 +472,11 @@
     });
 
     // Recent Prdoucts Modal
+    var recentProductsContent = '';
+    for (var i = 0; i < recentlyProducts.length; i++) {
+      recentProductsContent += '<div class="feature-row" ><a href="' + recentlyProducts[i].url + '" ><img class="feature-row__image" src="' + recentlyProducts[i].images[0]+ '"  tabindex="-1" alt="{{ image.alt | escape }}" /></a></div>';
+    }
+    $(".recent-products-slick").html(recentProductsContent);
     $(".recent-products-slick").slick({
       infinite: true,
       dots: false,
@@ -638,6 +639,36 @@
 
 {% schema %}
 {
-  "name": "Product pages"
+  "name": "Product pages",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fit_guide_title",
+      "label": "Fit Guide Title",
+      "default": "Fit Guide"
+    },
+    {
+      "type": "text",
+      "id": "size_guide_title",
+      "label": "Size Guide Title",
+      "default": "Can't Find Your Size"
+    },
+    {
+      "type": "header",
+      "content": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_btn_title",
+      "label": "CTA Btn Title",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_desc",
+      "label": "Bottom Description",
+      "default": "100% Guaranteed Fit. Free US Shipping + Returns."
+    }
+  ]
 }
 {% endschema %}
