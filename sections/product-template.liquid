@@ -95,24 +95,10 @@
                   </div>
                 {% endfor %}
               </div> -->
-            
-              {% unless product.has_only_default_variant %}
-                {% for option in product.options_with_values %}
-                  <div class="pdp-props product-options--option">
-                    {% unless option.name == 'Color' %}
-                      <label for="SingleOptionSelector-{{ forloop.index0 }}">
-                        {{ option.name }}
-                      </label>
-                      <ul data-option="{{ option.name }}" class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
-                        {% for value in option.values %}
-                          <li value="{{ value | escape }}"{% if option.selected_value == value %} class="active" {% endif %}>{{ value }}</li>
-                        {% endfor %}
-                      </ul>
-                      <input type="hidden" name="pdp-props-{{ option.name }}" />
-                    {% endunless %}
-                  </div>
-                {% endfor %}
-              {% endunless %}
+              <div class="pdp-props-wrapper">
+              </div>
+              <input type="hidden" name="id" id="product-variant-id" />
+             
               <!-- Fit Guide Modal -->
               <div class="pdp-fitguide-modelbox">
                 <a class="size_finder" href="#">{{ section.settings.fit_guide_title }}</a>
@@ -120,11 +106,12 @@
                   <div class="modelbox">{{ product.metafields.accentuate.fit_guide_summary }}</div>
                 {% endif %}
               </div>
+
               <!-- Add to Cart CTA -->
               <div class="pdp-cta">
                 {% if current_variant.available %}
                   <div class="add-to-cart">
-                    <div class="btn btn--raised btn-black btn-block btn-add-to-cart">{{ section.settings.add_to_cart_btn_title }}</div>
+                    <button type="submit" class="btn btn--raised btn-black btn-block btn-add-to-cart">{{ section.settings.add_to_cart_btn_title }}</button>
                     <div class="btn btn--raised btn-black btn-block btn-add-to-cart btn-adding-to-cart disabled hidden">Adding To Cart...<div class="cart-loading"></div>
                   </div>
                 {% endif %}
@@ -155,11 +142,14 @@
                   <li ><a data-id="1" href="#">International</a></li>
                 </ul>
                 <div class="tab-content">
-                  {% if product.tags['men'] %}
-                    {% assign isGenderMen = true %}
-                  {% else %}
-                    {% assign isGenderMen = false %}
-                  {% endif %}
+                  {% for tag in product.tags %}
+                    {% if tag == 'men' %}
+                      {% assign isGenderMen = true %}
+                      {% break %}
+                    {% else %}
+                      {% assign isGenderMen = false %}
+                    {% endif %}
+                  {% endfor %}
                   <div class="tab-content__item active">
                     <img class="size-chart"
                       src="{{ product.metafields.accentuate.fitguide_image }}">
@@ -195,17 +185,17 @@
                     {% endunless %}
                   </div>
                   <div class="tab-content__item">
-                    <div class="international-size-chart-wrapper">
+                    <div class="international-size-chart-wrapper {% unless isGenderMen %} womens-chart {% endunless %}">
                       {% if isGenderMen %}
                         <table class="international-size-chart">
                           <tbody>
                             <tr>
-                              <th>mens</th>
-                              <th>xs</th>
-                              <th>s</th>
-                              <th>m</th>
-                              <th>l</th>
-                              <th>xl</th>
+                              <td>mens</td>
+                              <td>xs</td>
+                              <td>s</td>
+                              <td>m</td>
+                              <td>l</td>
+                              <td>xl</td>
                             </tr>
                             <tr>
                               <td>european (EU)</td>
@@ -358,8 +348,8 @@
                     </div>
                   </div>
                 </div>
-                <h3 class="pdp-content__name">{{ product.metafields.accentuate.fit_guide_more_section_title }}</h3>
-                <p class="try-multiple-sizes-description">{{ product.metafields.accentuate.fit_guide_more_section_desc }}</p>
+                <h3 class="pdp-content__name">{{ section.settings.fit_guide_more_section_title }}</h3>
+                <p class="try-multiple-sizes-description">{{ section.settings.fit_guide_more_section_desc }}</p>
               </div>
             </div>
             <!-- Size Find Modal -->
@@ -371,21 +361,21 @@
                 {% include 'icon-close' %}
               </button>
               <div class="fit-guide">
-                <h2 class="pdp-content__name mt-0">{{ product.metafields.accentuate.size_guide_modal_title }}</h2>
+                <h2 class="pdp-content__name mt-0">{{ section.settings.size_guide_modal_title }}</h2>
                 <h3>{{ product.title }}</h3>
-                <div class="mt-3 mb-3">{{ product.metafields.accentuate.size_guide_modal_text_top }}</div>
+                <div class="mt-3 mb-3">{{ section.settings.size_guide_modal_top_desc }}</div>
                 {% for option in product.options_with_values %}
                   <div class="size-guide-props product-options--option">
                     {% unless option.name == 'Color' %}
                       <div class="optionSelector singleOptionSelector-{{ forloop.index0 }}">
                         Select a {{ option.name }}
                       </div>
-                      <ul data-option="{{ option.name }}" class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+                      <ul data-option="{{ option.name }}" class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index0 }}">
                         {% for value in option.values %}
                           <li value="{{ value | escape }}"{% if option.selected_value == value %} class="active" {% endif %}>{{ value }}</li>
                         {% endfor %}
                       </ul>
-                      <input type="hidden" name="size-guide-{{ option.name }}" />
+                      <input type="hidden" name="{{ option.name }}" />
                     {% endunless %}
                   </div>
                 {% endfor %}
@@ -405,9 +395,9 @@
                     autocomplete="off">
                   <span class="hidden">A valid email address is required</span>
                 </div>
-                <div class="mt-4 mb-2 font-weight-normal">{{ product.metafields.accentuate.size_guide_modal_text_bottom }}</div>
+                <div class="mt-4 mb-2 font-weight-normal">{{ section.settings.size_guide_modal_bottom_desc }}</div>
                 <div class="text-right">
-                  <span class="alert-btn disabled">Alert Me!</span>
+                  <span class="alert-btn disabled">{{ section.settings.alertbtn_title }}</span>
                 </div>
               </div>
             </div>
@@ -427,7 +417,7 @@
         </div>
 
         <div class="col-12 col-md-6 no-padding recent-products text-center">
-          <h4 class="section-header text-uppercase">Recently Viewed</h4>
+          <h4 class="section-header text-uppercase hidden">{{ section.settings.recent_products_title }}</h4>
           <div class="recent-products-slick">
           </div>
         </div>
@@ -440,22 +430,55 @@
   <script type="application/json" id="productJson">
     {{ product | json }}
   </script>
+  <script>
+      
+    function singleOptionSelectorHandler (e) {
+      var productJson = JSON.parse(document.getElementById('productJson').innerHTML);
+      if (e) {
+        var target = e.target;
+        var optionIndex = $(target).data('option');
+        var variantValue = $(target).attr('value');
+        selectedVariantOptionsList[optionIndex] = variantValue;
+        for ( var k = optionIndex + 1; k < selectedVariantOptionsList.length; k++) {
+          selectedVariantOptionsList[k] = undefined;
+        }
+        var dd = selectedVariantOptionsList.join(' / ');
+        $('#product-variant-id').val(dd);
+      }
+
+      var variants = productJson.variants || [];
+      var filteredVariants = variants.slice();
+      var content = '';
+      for (var i = 0; i < selectedVariantOptionsList.length; i++) {
+        content += '<div class="pdp-props product-options--option"><label for="SingleOptionSelector-' + i + '">' + productJson.options[i] + '</label>';
+        content += '<ul class="single-option-selector product-form__input" id="SingleOptionSelector-' + i + '">';
+        var uniqOptions = [];
+        filteredVariants.forEach(variant => {
+          if (uniqOptions.indexOf(variant.options[i]) == -1) {
+            uniqOptions.push(variant.options[i]);
+          }
+        });
+        uniqOptions.sort(function(a, b) {return a-b});
+        if (selectedVariantOptionsList[i] === undefined) {
+          selectedVariantOptionsList[i] = filteredVariants[0].options[i];
+        }
+        for ( var j = 0; j < uniqOptions.length; j++) {
+          var isActive = selectedVariantOptionsList[i] == uniqOptions[j] ? 'active' : '';
+          content += '<li onclick="singleOptionSelectorHandler(event)" data-option="' + i + '" class="' + isActive + '" value="' + uniqOptions[j] + '">' + uniqOptions[j] + '</li>';
+        }
+        filteredVariants = filteredVariants.filter(variant => variant.options[i] === selectedVariantOptionsList[i]);
+        content += '</ul></div>';
+      }
+      $('.pdp-props-wrapper').html(content);
+    };
+
+  </script>
 {% endunless %}
 
-{% javascript %}
-  $(window).load(function() {
-    var productJson = JSON.parse(document.getElementById('productJson').innerHTML);
-    var recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
-    if (recentlyProducts == null) recentlyProducts = [];
-      else recentlyProducts = recentlyProducts.map(item => item.id != productJson.id);
-    recentlyProducts.push({
-      id: productJson.id,
-      images: productJson.images,
-      url: productJson.url,
-    });
-    if (recentlyProducts.length > 6) recentlyProducts.shift();
-    window.localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyProducts));
 
+{% javascript %}
+
+  $(window).load(function() {
     var selectedProductImage = null;
     var _DRAGGGING_STARTED = 0;
     var _LAST_MOUSEMOVE_POSITION = { x: null, y: null };
@@ -471,12 +494,19 @@
       dots: true,
     });
 
+    // Product JSON
+    var productJson = JSON.parse(document.getElementById('productJson').innerHTML);
+
+
     // Recent Prdoucts Modal
+    var recentlyProducts = JSON.parse(window.localStorage.getItem('recentlyViewedProducts'));
+    if (recentlyProducts == null) recentlyProducts = [];
     var recentProductsContent = '';
     for (var i = 0; i < recentlyProducts.length; i++) {
       recentProductsContent += '<div class="feature-row" ><a href="' + recentlyProducts[i].url + '" ><img class="feature-row__image" src="' + recentlyProducts[i].images[0]+ '"  tabindex="-1" alt="{{ image.alt | escape }}" /></a></div>';
     }
     $(".recent-products-slick").html(recentProductsContent);
+    if (recentlyProducts.length > 0) $(".recent-products .section-header").removeClass('hidden');
     $(".recent-products-slick").slick({
       infinite: true,
       dots: false,
@@ -486,6 +516,16 @@
       slidesToShow: 1,
       speed: 500
     });
+    if (productJson) {
+      recentlyProducts = recentlyProducts.filter(item => item.id != productJson.id);
+      recentlyProducts.push({
+        id: productJson.id,
+        images: productJson.images,
+        url: productJson.url,
+      });
+    }
+    if (recentlyProducts.length > 6) recentlyProducts.shift();
+    window.localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyProducts));
 
     $('#pdp-desktop-flexslider').flexslider({
       animation: "slide",
@@ -619,21 +659,23 @@
       $('.tab-content .tab-content__item').eq(index).addClass('active');
     });
     
-    // PDP Props Option Selector
-    $('.pdp-props .single-option-selector li').on('click', function() {
-      var optionName = $(this).data('option');
-      $('.pdp-props .single-option-selector li').data('option', optionName).removeClass('active');
-      $(this).addClass('active');
-      $('input[name="pdp-props-' + optionName + '"]').value($(this).attr('value'));
-    });
-
     // Size Guide Props Selector
     $('.size-guide-props .single-option-selector li').on('click', function() {
       var optionName = $(this).data('option');
       $('.size-guide-props .single-option-selector li').data('option', optionName).removeClass('active');
       $(this).addClass('active');
-      $('input[name="size-guide-' + optionName + '"]').value($(this).attr('value'));
+      $('input[name="' + optionName + '"]').val($(this).attr('value'));
     });
+  });
+
+  var productJson = JSON.parse(document.getElementById('productJson').innerHTML);
+  selectedVariantOptionsList = new Array(productJson.options.length).fill(undefined);
+  
+  // Initialize Option Selector
+  singleOptionSelectorHandler();
+
+  $('.pdp-props .single-option-selector li').on('click', function (e) {
+    singleOptionSelectorHandler(e);
   });
 {% endjavascript %}
 
@@ -642,6 +684,10 @@
   "name": "Product pages",
   "settings": [
     {
+      "type": "header",
+      "content": "Fit Guide"
+    },
+    {
       "type": "text",
       "id": "fit_guide_title",
       "label": "Fit Guide Title",
@@ -649,9 +695,49 @@
     },
     {
       "type": "text",
+      "id": "fit_guide_more_section_title",
+      "label": "More Section Title",
+      "default": "Try Multiple Sizes"
+    },
+    {
+      "type": "text",
+      "id": "fit_guide_more_section_desc",
+      "label": "More Section Description",
+      "default": "Unsure about your perfect fit in DSTLD? Audition our denim in the comfort of your home with free shipping and returns."
+    },
+    {
+      "type": "header",
+      "content": "Size Guide"
+    },
+    {
+      "type": "text",
       "id": "size_guide_title",
-      "label": "Size Guide Title",
+      "label": "Link Title",
       "default": "Can't Find Your Size"
+    },
+    {
+      "type": "text",
+      "id": "size_guide_modal_title",
+      "label": "Modal Title",
+      "default": "Waitlist"
+    },
+    {
+      "type": "text",
+      "id": "size_guide_modal_top_desc",
+      "label": "Top Description",
+      "default": "Tell us your size and we'll notify you when this product becomes available."
+    },
+    {
+      "type": "text",
+      "id": "size_guide_modal_bottom_desc",
+      "label": "Bottom Description",
+      "default": "Select a size and enter your email above."
+    },
+    {
+      "type": "text",
+      "id": "alertbtn_title",
+      "label": "Alert Btn Title",
+      "default": "Alert Me!"
     },
     {
       "type": "header",
@@ -668,6 +754,16 @@
       "id": "add_to_cart_desc",
       "label": "Bottom Description",
       "default": "100% Guaranteed Fit. Free US Shipping + Returns."
+    },
+    {
+      "type": "header",
+      "content": "Recent Products"
+    },
+    {
+      "type": "text",
+      "id": "recent_products_title",
+      "label": "Title",
+      "default": "Recently Viewed"
     }
   ]
 }
